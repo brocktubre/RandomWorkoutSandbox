@@ -13,6 +13,7 @@ private var inMemoryMovements:Array<MovementObject> = Array<MovementObject>();
 struct ContentView: View {
     
     @State private var movment:String = "Ready for new movement?"
+    let wc = WorkoutController()
     
     var body: some View {
     
@@ -21,15 +22,14 @@ struct ContentView: View {
             VStack {
                 Spacer()
                 Text(movment)
-                    .multilineTextAlignment(.center).foregroundColor(Color.white).font(.largeTitle).padding(.all)
+                    .multilineTextAlignment(.center)
+                    .foregroundColor(Color.white)
+                    .font(.largeTitle)
+                    .padding(.all)
                 Spacer()
                 Button("Generate Movement", action: {
-                    let allMovements:Array<MovementObject> = inMemoryMovements
-                    let numberOfMovements:Int = allMovements.count
-                    let randomIndex = Int.random(in: 0..<numberOfMovements)
-                    movment = allMovements[randomIndex].movement
+                    movment = wc.getRandomMovement(inMemoryMovements)
                 }).onAppear() {
-                    let wc = WorkoutController()
                     inMemoryMovements = wc.getMovements()
                 }
                 .padding(/*@START_MENU_TOKEN@*/.all/*@END_MENU_TOKEN@*/)
@@ -37,10 +37,10 @@ struct ContentView: View {
                 .background(Color.green
                                 .blur(radius: /*@START_MENU_TOKEN@*/3.0/*@END_MENU_TOKEN@*/))
                 .font(.title2)
-                
+
                 Spacer()
             }
-            
+
         }
     }
         
