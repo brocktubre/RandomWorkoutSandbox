@@ -11,6 +11,7 @@ struct DetailsView: View {
     let equipment: Equipment
     var body: some View {
         VStack {
+            Spacer()
             EquipmentNameAndIdStack(equipment: equipment, equipmentFont: .largeTitle)
             Equipment.Image(name: equipment.imageName)
             Spacer()
@@ -23,13 +24,18 @@ struct DetailsView: View {
 struct RandomMovementView: View {
     let equipment: Equipment
     @State public var movement: String
+    @State private var showAlert: Bool = false
     var body: some View {
         
-        VStack(alignment: .center) {
-            Text(movement).font(.largeTitle)
+        VStack {
+                Spacer()
+                Text(movement)
+                .font(.largeTitle)
+                .multilineTextAlignment(.center)
                 Spacer()
                 Button(action:{
-                    movement = WorkoutController().getRandomMovement(equipmentId: equipment.id)
+                    self.showAlert = true
+                    //movement = WorkoutController().getRandomMovement(equipmentId: equipment.id)
                 }) {
                     HStack {
                         Text("Generate New Movement").accentColor(.white)
@@ -39,6 +45,15 @@ struct RandomMovementView: View {
                 }
                 .padding()
                 .background(Color.blue)
+                .alert(isPresented: $showAlert, content: {
+                    .init(
+                        title: .init("Generate new \(equipment.name.lowercased()) movement?"),
+                          primaryButton: .default(.init("Yes")) {
+                            movement = WorkoutController().getRandomMovement(equipmentId: equipment.id)
+                          }, secondaryButton: .cancel())
+
+                })
+
         }
     }
 }
@@ -46,5 +61,6 @@ struct RandomMovementView: View {
 struct DetailsView_Previews: PreviewProvider {
     static var previews: some View {
         DetailsView(equipment: .init())
+            .previewInAllColorSchemes
     }
 }

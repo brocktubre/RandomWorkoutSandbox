@@ -29,7 +29,7 @@ struct EquipmentRow: View {
                 Equipment.Image(name: equipment.imageName, size: 80)
                 EquipmentNameAndIdStack(equipment: equipment, equipmentFont: .title)
             }.lineLimit(1)
-        }
+        }.padding(.vertical, 8)
     }
 }
 
@@ -37,6 +37,6 @@ struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         List(EquipmentList().sortedEquipment, id: \.id) { equipment in
             EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName))
-        }
+        }.previewInAllColorSchemes
     }
 }

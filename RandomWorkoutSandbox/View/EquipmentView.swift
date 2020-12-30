@@ -12,12 +12,9 @@ struct EquipmentNameAndIdStack: View {
     var body: some View {
         VStack(alignment: .leading){
             Text(equipment.name.capitalized).font(equipmentFont)
-//            Text("Equipment ID: \(String(equipment.id))")
-//                    .font(.title3).foregroundColor(.secondary)
         }
     }
 }
-
 
 extension Equipment {
     struct Image: View {
@@ -44,7 +41,7 @@ struct Equipment_Previews: PreviewProvider {
             Equipment.Image(name: Equipment().imageName)
             Equipment.Image(name: "dumbbell")
             Equipment.Image(name: "Something else")
-        }
+        }.previewInAllColorSchemes
     }
 }
 
@@ -58,6 +55,12 @@ extension Image {
             let symbolName = "\(char?.lowercased() ?? "").square"
             self.init(systemName: symbolName)
         }
+    }
+}
+
+extension View {
+    var previewInAllColorSchemes: some View {
+        ForEach(ColorScheme.allCases, id: \.self, content: preferredColorScheme)
     }
 }
 
