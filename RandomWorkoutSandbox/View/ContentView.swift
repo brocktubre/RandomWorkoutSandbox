@@ -12,24 +12,7 @@ struct ContentView: View {
     let wc = WorkoutController()
     
     var body: some View {
-        ZStack{
-            Color.black.ignoresSafeArea()
-            VStack {
-                Spacer()
-                NavigationView {
-                    List(wc.getAllEquipmentList(), id: \.self) { eq in
-                        NavigationLink(destination: WorkoutByEquipmentView()) {
-                            Text("\(eq)")
-                                .padding(.bottom)
-                                .font(.body)
-                                .foregroundColor(Color.black)
-                        }
-                    }
-                }
-                Spacer()
-            }
-        }
-        
+        Text("Hello, world")
     }
         
 }

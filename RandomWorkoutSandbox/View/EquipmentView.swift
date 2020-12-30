@@ -28,7 +28,7 @@ struct Equipment_Previews: PreviewProvider {
         VStack{
             Equipment.Image(name: Equipment().name)
             Equipment.Image(name: "")
-            Equipment.Image(name: "👍")
+            Equipment.Image(name: "brock")
         }
     }
 }

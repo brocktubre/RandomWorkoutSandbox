@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		003C3D95259ADB390087E52C /* WorkoutByEquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3D94259ADB390087E52C /* WorkoutByEquipmentView.swift */; };
+		003C3D95259ADB390087E52C /* MovementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3D94259ADB390087E52C /* MovementView.swift */; };
 		003C3DBF259CB2090087E52C /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DBE259CB2090087E52C /* Equipment.swift */; };
 		003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DC2259CB9120087E52C /* EquipmentView.swift */; };
 		009EB242259A374B0007358A /* RandomWorkoutSandboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */; };
@@ -19,7 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		003C3D94259ADB390087E52C /* WorkoutByEquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutByEquipmentView.swift; sourceTree = "<group>"; };
+		003C3D94259ADB390087E52C /* MovementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementView.swift; sourceTree = "<group>"; };
 		003C3DBE259CB2090087E52C /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
 		003C3DC2259CB9120087E52C /* EquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentView.swift; sourceTree = "<group>"; };
 		009EB23E259A374B0007358A /* RandomWorkoutSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomWorkoutSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -95,7 +95,7 @@
 			isa = PBXGroup;
 			children = (
 				009EB243259A374B0007358A /* ContentView.swift */,
-				003C3D94259ADB390087E52C /* WorkoutByEquipmentView.swift */,
+				003C3D94259ADB390087E52C /* MovementView.swift */,
 				003C3DC2259CB9120087E52C /* EquipmentView.swift */,
 			);
 			path = View;
@@ -188,7 +188,7 @@
 				009EB252259A9E570007358A /* Movement.swift in Sources */,
 				009EB25D259AA3BA0007358A /* WorkoutController.swift in Sources */,
 				003C3DBF259CB2090087E52C /* Equipment.swift in Sources */,
-				003C3D95259ADB390087E52C /* WorkoutByEquipmentView.swift in Sources */,
+				003C3D95259ADB390087E52C /* MovementView.swift in Sources */,
 				009EB244259A374B0007358A /* ContentView.swift in Sources */,
 				003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */,
 				009EB242259A374B0007358A /* RandomWorkoutSandboxApp.swift in Sources */,
