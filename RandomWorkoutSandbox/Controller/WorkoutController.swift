@@ -26,12 +26,13 @@ class WorkoutController: UIViewController {
     }
     
     let OFFSET:Int = 3
+    public var inMemoryMovements:Array<Movement> = Array<Movement>();
     
     // This function returns all the movements as an array of MovementObjects
-    func getMovements() -> Array<MovementObject> {
+    func getMovements() -> Array<Movement> {
         print("Making HTTP request to get new workout.")
         
-        var allMovements = Array<MovementObject>();
+        var allMovements = Array<Movement>();
         let sem = DispatchSemaphore.init(value: 0)
         var eqNameG:String = ""
         
@@ -54,9 +55,9 @@ class WorkoutController: UIViewController {
                         }
                         if let entries = feed["entry"] as? [Any] {
                             for entry in entries {
-                                let newMovement = MovementObject()
-                                newMovement.equipmentId = index // set the parent equipment ID
-                                newMovement.equipmentName = eqNameG
+                                let newMovement = Movement(equipment: Equipment())
+                                newMovement.equipment.id = index // set the parent equipment ID
+                                newMovement.equipment.name = eqNameG
                                 
                                 let resultNew = entry as? [String:Any]
                                 
@@ -108,26 +109,36 @@ class WorkoutController: UIViewController {
             sem.wait()
         }
         // set the IDs for the movments
-        var index:Int = OFFSET
+        var index:Int = 0
         for m in allMovements {
-            m.movementId = index;
+            m.id = index;
             index += 1
         }
-        for m in allMovements {
-            print(m.toString())
-        }
+        inMemoryMovements = allMovements
         return allMovements
     }
     
-    func getRandomMovement(_ allMovements:Array<MovementObject>) -> String {
+    func getRandomMovement(_ allMovements:Array<Movement>) -> String {
             let numberOfMovements:Int = allMovements.count
             let randomIndex = Int.random(in: 0..<numberOfMovements)
             return allMovements[randomIndex].movement
     }
     
-    func getMovementsByEqId(_ id:Int) -> Array<MovementObject> {
+    func getAllEquipmentList() -> Array<String> {
+        var returnArray = Array<String>()
+        returnArray.append("All")
+        let allm = getMovements()
+        for eqName in allm {
+            if(!returnArray.contains(eqName.equipment.name)) {
+                returnArray.append(eqName.equipment.name)
+            }
+        }
+        return returnArray
+    }
+    
+    func getMovementsByEqId(_ id:Int) -> Array<Movement> {
         
-        var theMovements = Array<MovementObject>();
+        var theMovements = Array<Movement>();
         let sem = DispatchSemaphore.init(value: 0)
         
         let url = URL(string: "https://spreadsheets.google.com/feeds/list/1maZYewAC_-u2jUNJki1O_7zbygB4HyTzXRkJBsnuguw/\(id)/public/values?alt=json")!
@@ -141,7 +152,8 @@ class WorkoutController: UIViewController {
                 if let feed = dictionary["feed"] as? [String: Any] {
                     if let entries = feed["entry"] as? [Any] {
                         for entry in entries {
-                            let newMovement = MovementObject()
+                            let eq = Equipment()
+                            let newMovement = Movement(equipment: eq)
                             let resultNew = entry as? [String:Any]
 
                             // Get movement name
@@ -188,3 +200,4 @@ class WorkoutController: UIViewController {
     }
     
 }
+

@@ -7,22 +7,28 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		003C3D95259ADB390087E52C /* WorkoutByEquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3D94259ADB390087E52C /* WorkoutByEquipmentView.swift */; };
+		003C3DBF259CB2090087E52C /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DBE259CB2090087E52C /* Equipment.swift */; };
+		003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DC2259CB9120087E52C /* EquipmentView.swift */; };
 		009EB242259A374B0007358A /* RandomWorkoutSandboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */; };
 		009EB244259A374B0007358A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB243259A374B0007358A /* ContentView.swift */; };
 		009EB246259A374E0007358A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 009EB245259A374E0007358A /* Assets.xcassets */; };
 		009EB249259A374E0007358A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 009EB248259A374E0007358A /* Preview Assets.xcassets */; };
-		009EB252259A9E570007358A /* MovementObject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB251259A9E570007358A /* MovementObject.swift */; };
+		009EB252259A9E570007358A /* Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB251259A9E570007358A /* Movement.swift */; };
 		009EB25D259AA3BA0007358A /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB25C259AA3BA0007358A /* WorkoutController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		003C3D94259ADB390087E52C /* WorkoutByEquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutByEquipmentView.swift; sourceTree = "<group>"; };
+		003C3DBE259CB2090087E52C /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
+		003C3DC2259CB9120087E52C /* EquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentView.swift; sourceTree = "<group>"; };
 		009EB23E259A374B0007358A /* RandomWorkoutSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomWorkoutSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWorkoutSandboxApp.swift; sourceTree = "<group>"; };
 		009EB243259A374B0007358A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		009EB245259A374E0007358A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		009EB248259A374E0007358A /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		009EB24A259A374E0007358A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		009EB251259A9E570007358A /* MovementObject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementObject.swift; sourceTree = "<group>"; };
+		009EB251259A9E570007358A /* Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movement.swift; sourceTree = "<group>"; };
 		009EB25C259AA3BA0007358A /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -79,7 +85,8 @@
 		009EB257259AA0710007358A /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				009EB251259A9E570007358A /* MovementObject.swift */,
+				009EB251259A9E570007358A /* Movement.swift */,
+				003C3DBE259CB2090087E52C /* Equipment.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -88,6 +95,8 @@
 			isa = PBXGroup;
 			children = (
 				009EB243259A374B0007358A /* ContentView.swift */,
+				003C3D94259ADB390087E52C /* WorkoutByEquipmentView.swift */,
+				003C3DC2259CB9120087E52C /* EquipmentView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -176,9 +185,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				009EB252259A9E570007358A /* MovementObject.swift in Sources */,
+				009EB252259A9E570007358A /* Movement.swift in Sources */,
 				009EB25D259AA3BA0007358A /* WorkoutController.swift in Sources */,
+				003C3DBF259CB2090087E52C /* Equipment.swift in Sources */,
+				003C3D95259ADB390087E52C /* WorkoutByEquipmentView.swift in Sources */,
 				009EB244259A374B0007358A /* ContentView.swift in Sources */,
+				003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */,
 				009EB242259A374B0007358A /* RandomWorkoutSandboxApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
