@@ -8,13 +8,15 @@
 struct Equipment {
     var name: String
     var id: Int
+    var imageName: String
     
-    init(name: String = "wall ball", id: Int = -1) {
+    init(name: String = "wall ball", id: Int = -1, imageName: String = "wallball") {
         self.name = name
         self.id = id
+        self.imageName = imageName
     }
     
     func toString() -> String {
-        return "name = \(name), id = \(id)"
+        return "id = \(id), name = \(name), imageName = \(imageName)"
     }
 }

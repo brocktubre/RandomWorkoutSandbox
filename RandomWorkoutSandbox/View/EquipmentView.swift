@@ -26,22 +26,22 @@ extension Equipment {
 struct Equipment_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
-            Equipment.Image(name: Equipment().name)
-            Equipment.Image(name: "")
-            Equipment.Image(name: "brock")
+            Equipment.Image(name: Equipment().imageName)
+            Equipment.Image(name: "Something else")
         }
     }
 }
 
 extension Image {
     init?(title: String) {
-        guard
-            let char = title.first,
-            case let symbolName = "\(char.lowercased()).square",
-            UIImage(systemName: symbolName) != nil else {
-            return nil
+        let imageExist = UIImage(named: title) != nil
+        if (imageExist) {
+            self.init(title)
+        } else {
+            let char = title.first
+            let symbolName = "\(char?.lowercased() ?? "").square"
+            self.init(systemName: symbolName)
         }
-        self.init(systemName: symbolName)
     }
 }
 

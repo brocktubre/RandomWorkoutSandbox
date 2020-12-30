@@ -9,12 +9,24 @@ import SwiftUI
 import Foundation
 
 struct ContentView: View {
-    let wc = WorkoutController()
-    
     var body: some View {
-        Text("Hello, world")
+        EquipmentRow(equipment: .init())
     }
         
+}
+
+
+struct EquipmentRow: View {
+    let equipment: Equipment
+    var body: some View {
+        HStack{
+            Equipment.Image(name: equipment.imageName)
+            Text(equipment.name)
+                .font(.title2)
+                .multilineTextAlignment(.leading)
+            
+        }
+    }
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -22,3 +34,4 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+

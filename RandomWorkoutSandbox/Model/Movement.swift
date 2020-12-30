@@ -24,10 +24,10 @@ class Movement {
         self.repType = repType
         self.dynamic = dynamic
         self.id = id
-        self.equipment = Equipment(name: "wall ball", id: -1)
+        self.equipment = Equipment(name: "wall ball", id: -1, imageName: "wallball")
     }
     
     func toString() -> String {
-        return "movementId = \(id), equimentId = \(equipment.id),  equimentName = \(equipment.name), movement = \(movement), difficulty =  \(difficulty), rep_type = \(repType), dynamic \(dynamic), "
+        return "movementId = \(id), equimentId = \(equipment.id),  equipmentName = \(equipment.name), equipmentImageName = \(equipment.imageName), movement = \(movement), difficulty =  \(difficulty), rep_type = \(repType), dynamic \(dynamic), "
     }
 }
