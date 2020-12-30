@@ -10,11 +10,12 @@ import UIKit
 
 class WorkoutController: UIViewController {
     enum MovementDict: CaseIterable {
-        case DUMBBELLS
+        case DUMBBELL
         case BODYWEIGHT
         case SANDBAG
         case GHD
-        case WALL_TARGET
+        case WALL
+        case WALLBALL
         case ROPE
         case JUMP_ROPE
         case PULLUP_BAR
@@ -30,7 +31,7 @@ class WorkoutController: UIViewController {
     
     // This function returns all the movements as an array of MovementObjects
     func getMovements() -> Array<Movement> {
-        print("Making HTTP request to get new workout.")
+        print("Making HTTP request to get all movements (building dataset).")
         
         var allMovements = Array<Movement>();
         let sem = DispatchSemaphore.init(value: 0)
@@ -124,14 +125,20 @@ class WorkoutController: UIViewController {
             return allMovements[randomIndex].movement
     }
     
-    func getAllEquipmentList() -> Array<String> {
-        var returnArray = Array<String>()
-        returnArray.append("All")
+    func getAllEquipmentList() -> Array<Equipment> {
+        var eqNameArray = Array<String>()
+        var returnArray = Array<Equipment>()
         let allm = getMovements()
         for eqName in allm {
-            if(!returnArray.contains(eqName.equipment.name)) {
-                returnArray.append(eqName.equipment.name)
+            if(!eqNameArray.contains(eqName.equipment.name)) {
+                eqNameArray.append(eqName.equipment.name)
             }
+        }
+        var index:Int = 0
+        for eq in eqNameArray {
+            let e = Equipment(name: eq, id: index, imageName: eq.lowercased().replacingOccurrences(of: " ", with: ""))
+            returnArray.append(e)
+            index += 1
         }
         return returnArray
     }

@@ -27,6 +27,7 @@ struct Equipment_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
             Equipment.Image(name: Equipment().imageName)
+            Equipment.Image(name: "dumbbell")
             Equipment.Image(name: "Something else")
         }
     }

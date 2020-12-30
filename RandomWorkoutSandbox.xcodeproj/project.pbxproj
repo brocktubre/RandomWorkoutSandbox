@@ -10,6 +10,7 @@
 		003C3D95259ADB390087E52C /* MovementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3D94259ADB390087E52C /* MovementView.swift */; };
 		003C3DBF259CB2090087E52C /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DBE259CB2090087E52C /* Equipment.swift */; };
 		003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DC2259CB9120087E52C /* EquipmentView.swift */; };
+		003C3DD0259CF41C0087E52C /* EquipmentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DCF259CF41C0087E52C /* EquipmentList.swift */; };
 		009EB242259A374B0007358A /* RandomWorkoutSandboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */; };
 		009EB244259A374B0007358A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB243259A374B0007358A /* ContentView.swift */; };
 		009EB246259A374E0007358A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 009EB245259A374E0007358A /* Assets.xcassets */; };
@@ -22,6 +23,7 @@
 		003C3D94259ADB390087E52C /* MovementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementView.swift; sourceTree = "<group>"; };
 		003C3DBE259CB2090087E52C /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
 		003C3DC2259CB9120087E52C /* EquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentView.swift; sourceTree = "<group>"; };
+		003C3DCF259CF41C0087E52C /* EquipmentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentList.swift; sourceTree = "<group>"; };
 		009EB23E259A374B0007358A /* RandomWorkoutSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomWorkoutSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWorkoutSandboxApp.swift; sourceTree = "<group>"; };
 		009EB243259A374B0007358A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -70,6 +72,7 @@
 				009EB245259A374E0007358A /* Assets.xcassets */,
 				009EB24A259A374E0007358A /* Info.plist */,
 				009EB247259A374E0007358A /* Preview Content */,
+				003C3DCF259CF41C0087E52C /* EquipmentList.swift */,
 			);
 			path = RandomWorkoutSandbox;
 			sourceTree = "<group>";
@@ -187,6 +190,7 @@
 			files = (
 				009EB252259A9E570007358A /* Movement.swift in Sources */,
 				009EB25D259AA3BA0007358A /* WorkoutController.swift in Sources */,
+				003C3DD0259CF41C0087E52C /* EquipmentList.swift in Sources */,
 				003C3DBF259CB2090087E52C /* Equipment.swift in Sources */,
 				003C3D95259ADB390087E52C /* MovementView.swift in Sources */,
 				009EB244259A374B0007358A /* ContentView.swift in Sources */,
