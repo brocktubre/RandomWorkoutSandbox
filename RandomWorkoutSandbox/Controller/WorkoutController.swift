@@ -119,10 +119,18 @@ class WorkoutController: UIViewController {
         return allMovements
     }
     
-    func getRandomMovement(_ allMovements:Array<Movement>) -> String {
-            let numberOfMovements:Int = allMovements.count
+    func getRandomMovement(equipmentId: Int = -1) -> String {
+        if(equipmentId == -1) {
+            let numberOfMovements:Int = inMemoryMovements.count
             let randomIndex = Int.random(in: 0..<numberOfMovements)
-            return allMovements[randomIndex].movement
+            return inMemoryMovements[randomIndex].movement
+        }
+        else {
+            let movementsByEqId:Array<Movement> = getMovementsByEqId(equipmentId)
+            let numberOfMovements:Int = movementsByEqId.count
+            let randomIndex = Int.random(in: 0..<numberOfMovements)
+            return movementsByEqId[randomIndex].movement
+        }
     }
     
     func getAllEquipmentList() -> Array<Equipment> {
@@ -145,10 +153,11 @@ class WorkoutController: UIViewController {
     
     func getMovementsByEqId(_ id:Int) -> Array<Movement> {
         
+        let equipmentId = id + OFFSET
         var theMovements = Array<Movement>();
         let sem = DispatchSemaphore.init(value: 0)
         
-        let url = URL(string: "https://spreadsheets.google.com/feeds/list/1maZYewAC_-u2jUNJki1O_7zbygB4HyTzXRkJBsnuguw/\(id)/public/values?alt=json")!
+        let url = URL(string: "https://spreadsheets.google.com/feeds/list/1maZYewAC_-u2jUNJki1O_7zbygB4HyTzXRkJBsnuguw/\(equipmentId)/public/values?alt=json")!
         
         
         let task = URLSession.shared.dataTask(with: url) {(data, response, error) in

@@ -6,12 +6,13 @@
 //
 
 import SwiftUI
-import Foundation
 
 struct ContentView: View {
     var body: some View {
-        List(WorkoutController().getAllEquipmentList(), id: \.id) { equipment in
-            EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName))
+        NavigationView {
+            List(WorkoutController().getAllEquipmentList(), id: \.id) { equipment in
+                EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName))
+            }.navigationTitle("Equipment")
         }
     }
         
@@ -21,16 +22,13 @@ struct ContentView: View {
 struct EquipmentRow: View {
     let equipment: Equipment
     var body: some View {
-        HStack{
-            Equipment.Image(name: equipment.imageName)
-            Spacer()
-            Text(equipment.name)
-                .font(.title2)
-                .fontWeight(/*@START_MENU_TOKEN@*/.bold/*@END_MENU_TOKEN@*/)
-                .multilineTextAlignment(.leading)
-                .lineLimit(1)
-            Spacer()
-            
+        NavigationLink(
+            destination: DetailsView(equipment: equipment)
+            ) {
+            HStack{
+                Equipment.Image(name: equipment.imageName, size: 80)
+                EquipmentNameAndIdStack(equipment: equipment, equipmentFont: .title)
+            }.lineLimit(1)
         }
     }
 }
@@ -42,4 +40,3 @@ struct ContentView_Previews: PreviewProvider {
         }
     }
 }
-
