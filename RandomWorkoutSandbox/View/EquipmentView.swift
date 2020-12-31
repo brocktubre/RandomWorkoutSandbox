@@ -6,6 +6,20 @@
 //
 import SwiftUI
 
+struct FavoriteButton: View {
+    @ObservedObject var equipment: Equipment
+    
+    var body: some View {
+        let bookmark:String = "bookmark"
+        Button {
+            equipment.favorite.toggle()
+        } label: {
+            Image(systemName: equipment.favorite ? "\(bookmark).fill" : bookmark)
+                .font(.system(size: 48, weight: .light))
+        }
+    }
+}
+
 struct EquipmentNameAndIdStack: View {
     let equipment: Equipment
     let equipmentFont: Font
@@ -37,7 +51,11 @@ extension Equipment {
 struct Equipment_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
-            EquipmentNameAndIdStack(equipment: Equipment(), equipmentFont: .largeTitle)
+            HStack {
+                FavoriteButton(equipment: Equipment())
+                FavoriteButton(equipment: Equipment(favorite: true))
+                EquipmentNameAndIdStack(equipment: Equipment(), equipmentFont: .largeTitle)
+            }
             Equipment.Image(name: Equipment().imageName)
             Equipment.Image(name: "dumbbell")
             Equipment.Image(name: "Something else")

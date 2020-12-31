@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     var body: some View {
         NavigationView {
-            List(WorkoutController().getAllEquipmentList(), id: \.id) { equipment in
+            List(WorkoutController().getAllEquipmentList()) { equipment in
                 EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName))
             }.navigationTitle("Equipment")
         }
@@ -26,6 +26,8 @@ struct EquipmentRow: View {
             destination: DetailsView(equipment: equipment)
             ) {
             HStack{
+                FavoriteButton(equipment: equipment)
+                    .buttonStyle(BorderlessButtonStyle())
                 Equipment.Image(name: equipment.imageName, size: 80)
                 EquipmentNameAndIdStack(equipment: equipment, equipmentFont: .title)
             }.lineLimit(1)
@@ -35,7 +37,7 @@ struct EquipmentRow: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        List(EquipmentList().sortedEquipment, id: \.id) { equipment in
+        List(EquipmentList().sortedEquipment) { equipment in
             EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName))
         }.previewInAllColorSchemes
     }

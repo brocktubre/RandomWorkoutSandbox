@@ -12,6 +12,7 @@
 		003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DC2259CB9120087E52C /* EquipmentView.swift */; };
 		003C3DD0259CF41C0087E52C /* EquipmentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DCF259CF41C0087E52C /* EquipmentList.swift */; };
 		003C3DD7259CF82C0087E52C /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DD6259CF82C0087E52C /* DetailsView.swift */; };
+		00830BC0259E20A7000C6D3D /* MovementList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00830BBF259E20A7000C6D3D /* MovementList.swift */; };
 		009EB242259A374B0007358A /* RandomWorkoutSandboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */; };
 		009EB244259A374B0007358A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB243259A374B0007358A /* ContentView.swift */; };
 		009EB246259A374E0007358A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 009EB245259A374E0007358A /* Assets.xcassets */; };
@@ -26,6 +27,7 @@
 		003C3DC2259CB9120087E52C /* EquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentView.swift; sourceTree = "<group>"; };
 		003C3DCF259CF41C0087E52C /* EquipmentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentList.swift; sourceTree = "<group>"; };
 		003C3DD6259CF82C0087E52C /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		00830BBF259E20A7000C6D3D /* MovementList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementList.swift; sourceTree = "<group>"; };
 		009EB23E259A374B0007358A /* RandomWorkoutSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomWorkoutSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWorkoutSandboxApp.swift; sourceTree = "<group>"; };
 		009EB243259A374B0007358A /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -75,6 +77,7 @@
 				009EB24A259A374E0007358A /* Info.plist */,
 				009EB247259A374E0007358A /* Preview Content */,
 				003C3DCF259CF41C0087E52C /* EquipmentList.swift */,
+				00830BBF259E20A7000C6D3D /* MovementList.swift */,
 			);
 			path = RandomWorkoutSandbox;
 			sourceTree = "<group>";
@@ -195,6 +198,7 @@
 				009EB25D259AA3BA0007358A /* WorkoutController.swift in Sources */,
 				003C3DD7259CF82C0087E52C /* DetailsView.swift in Sources */,
 				003C3DD0259CF41C0087E52C /* EquipmentList.swift in Sources */,
+				00830BC0259E20A7000C6D3D /* MovementList.swift in Sources */,
 				003C3DBF259CB2090087E52C /* Equipment.swift in Sources */,
 				003C3D95259ADB390087E52C /* MovementView.swift in Sources */,
 				009EB244259A374B0007358A /* ContentView.swift in Sources */,
