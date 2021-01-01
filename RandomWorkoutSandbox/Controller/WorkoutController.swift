@@ -9,6 +9,8 @@ import Foundation
 import UIKit
 import Amplify
 import Combine
+import RxSwift
+
 
 class WorkoutController: UIViewController {
     enum MovementDict: CaseIterable {
@@ -39,123 +41,146 @@ class WorkoutController: UIViewController {
 //
 //    }
     
-    func callLambdaFunc()  {
-        let request = RESTRequest(path: "/movements")
-//        let sink = Amplify.API.get(request: request)
-//            .resultPublisher
-//            .sink {
-//                if case let .failure(apiError) = $0 {
-//                    print("Failed", apiError)
-//                }
-//            }
-//            receiveValue: { data in
-//                let str = String(decoding: data, as: UTF8.self)
-//                print("Success \(str)")
-//            }
-//        return sink
-        
-        Amplify.API.get(request: request) { result in
-            switch result {
-                case .success(let data):
-                        let str = String(decoding: data, as: UTF8.self)
-                        print("Success \(str)")
-                case .failure(let apiError):
-                        print("Failed", apiError)
-                }
-
-        }
-    }
-    
-    // This function returns all the movements as an array of MovementObjects
-    func getMovements() -> Array<Movement> {
-        print("Making HTTP request to get all movements (building dataset).")
+    func getMovements() -> Observable<Array<Movement>> {
         
         var allMovements = Array<Movement>();
-        let sem = DispatchSemaphore.init(value: 0)
-        var eqNameG:String = ""
         
-        let numberOfEquipment = MovementDict.allCases.count
-        for i in 0..<numberOfEquipment {
-            let index = (i + OFFSET)
-            let url = URL(string: "https://spreadsheets.google.com/feeds/list/1maZYewAC_-u2jUNJki1O_7zbygB4HyTzXRkJBsnuguw/\(index)/public/values?alt=json")!
-            
-            
-            let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
-                defer { sem.signal() }
-                guard let data = data else { return }
-                let json = try? JSONSerialization.jsonObject(with: data, options: [])
-                if let dictionary = json as? [String: Any] {
-                    if let feed = dictionary["feed"] as? [String: Any] {
-                        if let title = feed["title"] as? [String: Any] {
-                            if let eqName = title["$t"] as? String {
-                                eqNameG = eqName
-                            }
-                        }
-                        if let entries = feed["entry"] as? [Any] {
-                            for entry in entries {
-                                let newMovement = Movement(equipment: Equipment())
-                                newMovement.equipment.id = index // set the parent equipment ID
-                                newMovement.equipment.name = eqNameG
-                                
-                                let resultNew = entry as? [String:Any]
-                                
-                                // Get movement name
-                                let movement = resultNew!["gsx$movement"] as? [String: Any]
-                                let movementName = movement!["$t"] as? String
-                                newMovement.movement = movementName ?? ""
-                                
-                                // Get equipmentName name
-//                                let eqName = resultNew!["gsx$movement"] as? [String: Any]
-//                                let eqNameVal = eqName!["$t"] as? String
-//                                newMovement.equipmentName = eqNameVal ?? ""
-                                
-
-                                // Get movement difficulty
-                                let difficulty = resultNew!["gsx$difficulty"] as? [String: Any]
-                                let difficultyVal = difficulty!["$t"] as? String
-                                let difficultyValAsInt = Int(String(difficultyVal!))
-                                newMovement.difficulty = difficultyValAsInt ?? -1
-
-                                // Get movement repType
-                                let repType = resultNew!["gsx$reptype"] as? [String: Any]
-                                let repTypeVal = repType!["$t"] as? String
-
-                                if(repTypeVal == "") {
-                                    newMovement.repType = "number"
-                                } else {
-                                    newMovement.repType = repTypeVal!
+        let request = RESTRequest(path: "/movements")
+        return Observable.create { observer in
+            Amplify.API.get(request: request) { [self] result in
+                switch result {
+                    case .success(let data):
+                        do {
+                            if let jsonArray = try JSONSerialization.jsonObject(with: data, options : .allowFragments) as? [Dictionary<String,AnyObject>]
+                            {
+                                for movement in jsonArray {
+                                    let newMovement = Movement(equipment: Equipment())
+                                    // newMovement.equipment.id = movement["id"] as! Int
+                                    newMovement.equipment.name = movement["equipment"] as! String
+                                    
+                                    newMovement.id = movement["id"] as! Int
+                                    newMovement.movement = movement["movement"] as! String
+                                    newMovement.difficulty = movement["difficulty"] as! Int
+                                    newMovement.repType = movement["repType"] as! String
+                                    newMovement.dynamic = movement["dynamic"] as! Bool
+                                    
+                                    allMovements.append(newMovement)
                                 }
-
-                                // Get movement dynamic
-                                let dynamic = resultNew!["gsx$dynamic"] as? [String: Any]
-                                let dynamicVal = dynamic!["$t"] as? String
-                                if(dynamicVal == "n"){
-                                    newMovement.dynamic = false
-                                } else {
-                                    newMovement.dynamic = true
+                                var index:Int = 0
+                                for m in allMovements {
+                                   m.id = index;
+                                   index += 1
                                 }
-                                allMovements.append(newMovement)
+                                inMemoryMovements = allMovements
+                                observer.onNext(allMovements)
+                                observer.onCompleted()
+                            } else {
+                                print("Bad JSON")
                             }
+                        } catch let error as NSError {
+                            observer.onError(error)
                         }
 
+                    case .failure(let apiError):
+                        observer.onError(apiError)
                     }
-
-                }
-                
-            };
-            task.resume()
-            sem.wait()
+            }
+            return Disposables.create()
         }
-        // set the IDs for the movments
-        var index:Int = 0
-        for m in allMovements {
-            m.id = index;
-            index += 1
-        }
-        inMemoryMovements = allMovements
-        return allMovements
+        
     }
     
+//     This function returns all the movements as an array of MovementObjects
+//    func getMovements() -> Array<Movement> {
+//        callLambdaFunc()
+//        print("Making HTTP request to get all movements (building dataset).")
+//
+//        var allMovements = Array<Movement>();
+//        let sem = DispatchSemaphore.init(value: 0)
+//        var eqNameG:String = ""
+//
+//        let numberOfEquipment = MovementDict.allCases.count
+//        for i in 0..<numberOfEquipment {
+//            let index = (i + OFFSET)
+//            let url = URL(string: "https://spreadsheets.google.com/feeds/list/1maZYewAC_-u2jUNJki1O_7zbygB4HyTzXRkJBsnuguw/\(index)/public/values?alt=json")!
+//
+//
+//            let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+//                defer { sem.signal() }
+//                guard let data = data else { return }
+//                let json = try? JSONSerialization.jsonObject(with: data, options: [])
+//                if let dictionary = json as? [String: Any] {
+//                    if let feed = dictionary["feed"] as? [String: Any] {
+//                        if let title = feed["title"] as? [String: Any] {
+//                            if let eqName = title["$t"] as? String {
+//                                eqNameG = eqName
+//                            }
+//                        }
+//                        if let entries = feed["entry"] as? [Any] {
+//                            for entry in entries {
+//                                let newMovement = Movement(equipment: Equipment())
+//                                newMovement.equipment.id = index // set the parent equipment ID
+//                                newMovement.equipment.name = eqNameG
+//
+//                                let resultNew = entry as? [String:Any]
+//
+//                                // Get movement name
+//                                let movement = resultNew!["gsx$movement"] as? [String: Any]
+//                                let movementName = movement!["$t"] as? String
+//                                newMovement.movement = movementName ?? ""
+//
+//                                // Get equipmentName name
+////                                let eqName = resultNew!["gsx$movement"] as? [String: Any]
+////                                let eqNameVal = eqName!["$t"] as? String
+////                                newMovement.equipmentName = eqNameVal ?? ""
+//
+//
+//                                // Get movement difficulty
+//                                let difficulty = resultNew!["gsx$difficulty"] as? [String: Any]
+//                                let difficultyVal = difficulty!["$t"] as? String
+//                                let difficultyValAsInt = Int(String(difficultyVal!))
+//                                newMovement.difficulty = difficultyValAsInt ?? -1
+//
+//                                // Get movement repType
+//                                let repType = resultNew!["gsx$reptype"] as? [String: Any]
+//                                let repTypeVal = repType!["$t"] as? String
+//
+//                                if(repTypeVal == "") {
+//                                    newMovement.repType = "number"
+//                                } else {
+//                                    newMovement.repType = repTypeVal!
+//                                }
+//
+//                                // Get movement dynamic
+//                                let dynamic = resultNew!["gsx$dynamic"] as? [String: Any]
+//                                let dynamicVal = dynamic!["$t"] as? String
+//                                if(dynamicVal == "n"){
+//                                    newMovement.dynamic = false
+//                                } else {
+//                                    newMovement.dynamic = true
+//                                }
+//                                allMovements.append(newMovement)
+//                            }
+//                        }
+//
+//                    }
+//
+//                }
+//
+//            };
+//            task.resume()
+//            sem.wait()
+//        }
+//        // set the IDs for the movments
+//        var index:Int = 0
+//        for m in allMovements {
+//            m.id = index;
+//            index += 1
+//        }
+//        inMemoryMovements = allMovements
+//        return allMovements
+//    }
+
     func getRandomMovement(equipmentId: Int = -1) -> String {
         if(equipmentId == -1) {
             let numberOfMovements:Int = inMemoryMovements.count
@@ -173,18 +198,21 @@ class WorkoutController: UIViewController {
     func getAllEquipmentList() -> Array<Equipment> {
         var eqNameArray = Array<String>()
         var returnArray = Array<Equipment>()
-        let allm = getMovements()
-        for eqName in allm {
-            if(!eqNameArray.contains(eqName.equipment.name)) {
-                eqNameArray.append(eqName.equipment.name)
+        self.getMovements().subscribe(onNext: { allMovements in
+            for movement in allMovements {
+                if(!eqNameArray.contains(movement.equipment.name)) {
+                    eqNameArray.append(movement.equipment.name)
+                }
             }
-        }
-        var index:Int = 0
-        for eq in eqNameArray {
-            let e = Equipment(name: eq, id: index, imageName: eq.lowercased().replacingOccurrences(of: " ", with: ""))
-            returnArray.append(e)
-            index += 1
-        }
+            var index:Int = 0
+            for eq in eqNameArray {
+                let e = Equipment(name: eq,
+                                  id: index,
+                                  imageName: eq.lowercased().replacingOccurrences(of: " ", with: ""))
+                returnArray.append(e)
+                index += 1
+            }
+        })
         return returnArray
     }
     

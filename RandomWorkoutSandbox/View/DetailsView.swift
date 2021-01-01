@@ -37,18 +37,6 @@ struct RandomMovementView: View {
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
                 Spacer()
-                Button(action: {
-                    let something = WorkoutController().callLambdaFunc()
-                    
-                    
-                }) {
-                    HStack {
-                        Text("Call Lambda Func").accentColor(.white)
-                    }
-                }
-                .padding()
-                .background(Color.black)
-                Spacer()
                 Button(action:{
                     self.showAlert = true
                 }) {

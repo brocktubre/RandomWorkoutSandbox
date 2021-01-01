@@ -30,12 +30,22 @@ PODS:
   - AWSPluginsCore (1.5.2):
     - Amplify (= 1.5.2)
     - AWSCore (~> 2.21.0)
+  - RxCocoa (6.0.0-rc.2):
+    - RxRelay (= 6.0.0-rc.2)
+    - RxSwift (= 6.0.0-rc.2)
+  - RxRelay (6.0.0-rc.2):
+    - RxSwift (= 6.0.0-rc.2)
+  - RxSwift (6.0.0-rc.2)
   - Starscream (3.1.1)
+  - SwiftyJSON (4.3.0)
 
 DEPENDENCIES:
   - Amplify
   - AmplifyPlugins/AWSAPIPlugin
   - AmplifyPlugins/AWSCognitoAuthPlugin
+  - RxCocoa (= 6.0.0-rc.2)
+  - RxSwift (= 6.0.0-rc.2)
+  - SwiftyJSON (~> 4.0)
 
 SPEC REPOS:
   trunk:
@@ -48,7 +58,11 @@ SPEC REPOS:
     - AWSCore
     - AWSMobileClient
     - AWSPluginsCore
+    - RxCocoa
+    - RxRelay
+    - RxSwift
     - Starscream
+    - SwiftyJSON
 
 SPEC CHECKSUMS:
   Amplify: ab6311e55abba45613c3990e8233b5ffa965d556
@@ -60,8 +74,12 @@ SPEC CHECKSUMS:
   AWSCore: a855a41cb2d43c8b538d3a80f8e855ed947f3d3c
   AWSMobileClient: 21f4e54eb90a7bcab22e7cb22fd6043b8c6f93e1
   AWSPluginsCore: 58fbe8752faffd4a3d94799d942ebb6f3bf96fe9
+  RxCocoa: 38445a25751be5907f52f7ea02c137f52ce2e7f2
+  RxRelay: b9e2483e83f46e4e7bf1234c6fe418e5c2eaf825
+  RxSwift: ada35be6643bedf6881cdbd6bbfb27aeea527670
   Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+  SwiftyJSON: 6faa0040f8b59dead0ee07436cbf76b73c08fd08
 
-PODFILE CHECKSUM: 62d4179caebecd22eaf2d0a6d2258e6dfc0c2296
+PODFILE CHECKSUM: 5394b7bba277cd4093c2aa6fbe0cfa3f61274dd3
 
 COCOAPODS: 1.10.0

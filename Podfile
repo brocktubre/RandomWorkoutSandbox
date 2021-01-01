@@ -9,4 +9,7 @@ target 'RandomWorkoutSandbox' do
   pod 'Amplify'
   pod 'AmplifyPlugins/AWSCognitoAuthPlugin'
   pod 'AmplifyPlugins/AWSAPIPlugin'
+  pod 'SwiftyJSON', '~> 4.0'
+  pod 'RxSwift', '6.0.0-rc.2'
+  pod 'RxCocoa', '6.0.0-rc.2'
 end
