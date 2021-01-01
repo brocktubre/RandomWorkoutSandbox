@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -12,6 +12,8 @@
 		003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DC2259CB9120087E52C /* EquipmentView.swift */; };
 		003C3DD0259CF41C0087E52C /* EquipmentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DCF259CF41C0087E52C /* EquipmentList.swift */; };
 		003C3DD7259CF82C0087E52C /* DetailsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DD6259CF82C0087E52C /* DetailsView.swift */; };
+		00659559259E7C180052D869 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 00659557259E7C180052D869 /* amplifyconfiguration.json */; };
+		0065955A259E7C180052D869 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 00659558259E7C180052D869 /* awsconfiguration.json */; };
 		00830BC0259E20A7000C6D3D /* MovementList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00830BBF259E20A7000C6D3D /* MovementList.swift */; };
 		009EB242259A374B0007358A /* RandomWorkoutSandboxApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */; };
 		009EB244259A374B0007358A /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB243259A374B0007358A /* ContentView.swift */; };
@@ -19,6 +21,9 @@
 		009EB249259A374E0007358A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 009EB248259A374E0007358A /* Preview Assets.xcassets */; };
 		009EB252259A9E570007358A /* Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB251259A9E570007358A /* Movement.swift */; };
 		009EB25D259AA3BA0007358A /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB25C259AA3BA0007358A /* WorkoutController.swift */; };
+		1CE7AD12E9FF48BAA56A3027 /* amplifyconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = C358C16400864E8C9A495229 /* amplifyconfiguration.json */; };
+		5218C997E59A127C864C807D /* Pods_RandomWorkoutSandbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661A712E664FF388FF9CC10C /* Pods_RandomWorkoutSandbox.framework */; };
+		E150CAE6413C4157BA02F70D /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = CFF9CD1332C24C718931B9A4 /* awsconfiguration.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +32,8 @@
 		003C3DC2259CB9120087E52C /* EquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentView.swift; sourceTree = "<group>"; };
 		003C3DCF259CF41C0087E52C /* EquipmentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentList.swift; sourceTree = "<group>"; };
 		003C3DD6259CF82C0087E52C /* DetailsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsView.swift; sourceTree = "<group>"; };
+		00659557259E7C180052D869 /* amplifyconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = amplifyconfiguration.json; sourceTree = SOURCE_ROOT; };
+		00659558259E7C180052D869 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = SOURCE_ROOT; };
 		00830BBF259E20A7000C6D3D /* MovementList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementList.swift; sourceTree = "<group>"; };
 		009EB23E259A374B0007358A /* RandomWorkoutSandbox.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RandomWorkoutSandbox.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RandomWorkoutSandboxApp.swift; sourceTree = "<group>"; };
@@ -36,6 +43,12 @@
 		009EB24A259A374E0007358A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		009EB251259A9E570007358A /* Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movement.swift; sourceTree = "<group>"; };
 		009EB25C259AA3BA0007358A /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
+		661A712E664FF388FF9CC10C /* Pods_RandomWorkoutSandbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RandomWorkoutSandbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		BC5591342D914D7BB39648EE /* amplifytools.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; path = amplifytools.xcconfig; sourceTree = "<group>"; };
+		C358C16400864E8C9A495229 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = amplifyconfiguration.json; sourceTree = "<group>"; };
+		C781FC596EE81F0E30A2F95F /* Pods-RandomWorkoutSandbox.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RandomWorkoutSandbox.debug.xcconfig"; path = "Target Support Files/Pods-RandomWorkoutSandbox/Pods-RandomWorkoutSandbox.debug.xcconfig"; sourceTree = "<group>"; };
+		CFF9CD1332C24C718931B9A4 /* awsconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = awsconfiguration.json; sourceTree = "<group>"; };
+		E7CEFCF80D01F6ACCB34BAD1 /* Pods-RandomWorkoutSandbox.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RandomWorkoutSandbox.release.xcconfig"; path = "Target Support Files/Pods-RandomWorkoutSandbox/Pods-RandomWorkoutSandbox.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5218C997E59A127C864C807D /* Pods_RandomWorkoutSandbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -52,8 +66,11 @@
 		009EB235259A374A0007358A = {
 			isa = PBXGroup;
 			children = (
+				EFC89FB81ABF479484690E15 /* AmplifyConfig */,
 				009EB240259A374B0007358A /* RandomWorkoutSandbox */,
 				009EB23F259A374B0007358A /* Products */,
+				5CC0A5C8ED220EE4448171E5 /* Pods */,
+				AEBC80DBBFAD97985BB1ED3D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -68,7 +85,8 @@
 		009EB240259A374B0007358A /* RandomWorkoutSandbox */ = {
 			isa = PBXGroup;
 			children = (
-				009EB25F259AA64C0007358A /* Service */,
+				00659557259E7C180052D869 /* amplifyconfiguration.json */,
+				00659558259E7C180052D869 /* awsconfiguration.json */,
 				009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */,
 				009EB25A259AA0840007358A /* Controller */,
 				009EB259259AA07F0007358A /* View */,
@@ -118,11 +136,32 @@
 			path = Controller;
 			sourceTree = "<group>";
 		};
-		009EB25F259AA64C0007358A /* Service */ = {
+		5CC0A5C8ED220EE4448171E5 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
+				C781FC596EE81F0E30A2F95F /* Pods-RandomWorkoutSandbox.debug.xcconfig */,
+				E7CEFCF80D01F6ACCB34BAD1 /* Pods-RandomWorkoutSandbox.release.xcconfig */,
 			);
-			path = Service;
+			path = Pods;
+			sourceTree = "<group>";
+		};
+		AEBC80DBBFAD97985BB1ED3D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				661A712E664FF388FF9CC10C /* Pods_RandomWorkoutSandbox.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		EFC89FB81ABF479484690E15 /* AmplifyConfig */ = {
+			isa = PBXGroup;
+			children = (
+				BC5591342D914D7BB39648EE /* amplifytools.xcconfig */,
+				C358C16400864E8C9A495229 /* amplifyconfiguration.json */,
+				CFF9CD1332C24C718931B9A4 /* awsconfiguration.json */,
+			);
+			name = AmplifyConfig;
+			path = .;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -132,9 +171,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 009EB24D259A374E0007358A /* Build configuration list for PBXNativeTarget "RandomWorkoutSandbox" */;
 			buildPhases = (
+				5F14690426F493FC85C2CE2A /* [CP] Check Pods Manifest.lock */,
 				009EB23A259A374A0007358A /* Sources */,
 				009EB23B259A374A0007358A /* Frameworks */,
 				009EB23C259A374A0007358A /* Resources */,
+				40A9EBABD58CDDD6745EB4D0 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -184,10 +225,56 @@
 			files = (
 				009EB249259A374E0007358A /* Preview Assets.xcassets in Resources */,
 				009EB246259A374E0007358A /* Assets.xcassets in Resources */,
+				0065955A259E7C180052D869 /* awsconfiguration.json in Resources */,
+				00659559259E7C180052D869 /* amplifyconfiguration.json in Resources */,
+				1CE7AD12E9FF48BAA56A3027 /* amplifyconfiguration.json in Resources */,
+				E150CAE6413C4157BA02F70D /* awsconfiguration.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		40A9EBABD58CDDD6745EB4D0 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RandomWorkoutSandbox/Pods-RandomWorkoutSandbox-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-RandomWorkoutSandbox/Pods-RandomWorkoutSandbox-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-RandomWorkoutSandbox/Pods-RandomWorkoutSandbox-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		5F14690426F493FC85C2CE2A /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-RandomWorkoutSandbox-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		009EB23A259A374A0007358A /* Sources */ = {
@@ -328,6 +415,7 @@
 		};
 		009EB24E259A374E0007358A /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C781FC596EE81F0E30A2F95F /* Pods-RandomWorkoutSandbox.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
@@ -349,6 +437,7 @@
 		};
 		009EB24F259A374E0007358A /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E7CEFCF80D01F6ACCB34BAD1 /* Pods-RandomWorkoutSandbox.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;

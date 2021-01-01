@@ -1,0 +1,49 @@
+{
+    "paths": [
+        {
+            "name": "/movements",
+            "lambdaFunction": "GetAllMovementsIOSAmplify",
+            "privacy": {
+                "protected": true,
+                "auth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ],
+                "unauth": [
+                    "/POST",
+                    "/GET",
+                    "/PUT",
+                    "/PATCH",
+                    "/DELETE"
+                ]
+            },
+            "policyResourceName": "/movements"
+        }
+    ],
+    "resourceName": "RandomWodAmplifyApi",
+    "apiName": "RandomWodAmplifyApi",
+    "functionArns": [
+        {
+            "lambdaFunction": "GetAllMovementsIOSAmplify"
+        }
+    ],
+    "privacy": {
+        "auth": 1,
+        "unauth": 1,
+        "authRoleName": "amplify-randomworkoutsandbox-dev-162002-authRole",
+        "unAuthRoleName": "amplify-randomworkoutsandbox-dev-162002-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "GetAllMovementsIOSAmplify",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

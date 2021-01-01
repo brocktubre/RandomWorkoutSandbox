@@ -1,0 +1,67 @@
+PODS:
+  - Amplify (1.5.2):
+    - Amplify/Default (= 1.5.2)
+  - Amplify/Default (1.5.2)
+  - AmplifyPlugins/AWSAPIPlugin (1.5.2):
+    - AppSyncRealTimeClient (~> 1.4.0)
+    - AWSCore (~> 2.21.0)
+    - AWSPluginsCore (= 1.5.2)
+  - AmplifyPlugins/AWSCognitoAuthPlugin (1.5.2):
+    - AWSAuthCore (~> 2.21.0)
+    - AWSCognitoIdentityProvider (~> 2.21.0)
+    - AWSCognitoIdentityProviderASF (~> 2.21.0)
+    - AWSCore (~> 2.21.0)
+    - AWSMobileClient (~> 2.21.0)
+    - AWSPluginsCore (= 1.5.2)
+  - AppSyncRealTimeClient (1.4.2):
+    - Starscream (~> 3.1.0)
+  - AWSAuthCore (2.21.1):
+    - AWSCore (= 2.21.1)
+  - AWSCognitoIdentityProvider (2.21.1):
+    - AWSCognitoIdentityProviderASF (= 2.21.1)
+    - AWSCore (= 2.21.1)
+  - AWSCognitoIdentityProviderASF (2.21.1)
+  - AWSCore (2.21.1)
+  - AWSMobileClient (2.21.1):
+    - AWSAuthCore (= 2.21.1)
+    - AWSCognitoIdentityProvider (= 2.21.1)
+    - AWSCognitoIdentityProviderASF (= 2.21.1)
+    - AWSCore (= 2.21.1)
+  - AWSPluginsCore (1.5.2):
+    - Amplify (= 1.5.2)
+    - AWSCore (~> 2.21.0)
+  - Starscream (3.1.1)
+
+DEPENDENCIES:
+  - Amplify
+  - AmplifyPlugins/AWSAPIPlugin
+  - AmplifyPlugins/AWSCognitoAuthPlugin
+
+SPEC REPOS:
+  trunk:
+    - Amplify
+    - AmplifyPlugins
+    - AppSyncRealTimeClient
+    - AWSAuthCore
+    - AWSCognitoIdentityProvider
+    - AWSCognitoIdentityProviderASF
+    - AWSCore
+    - AWSMobileClient
+    - AWSPluginsCore
+    - Starscream
+
+SPEC CHECKSUMS:
+  Amplify: ab6311e55abba45613c3990e8233b5ffa965d556
+  AmplifyPlugins: 91abe3ca8af4337147e98655f6e603d398784f7a
+  AppSyncRealTimeClient: 7fb160294d067b6c0c4b3c4ab91e953fd4cfba30
+  AWSAuthCore: 0c8f99de21a92134f052fb38c579f977e269b0c8
+  AWSCognitoIdentityProvider: 6ac90a6833bfabd22c80863a96240ab9098186f4
+  AWSCognitoIdentityProviderASF: 318df44cc620dc401a04a94e57107b2af316c50e
+  AWSCore: a855a41cb2d43c8b538d3a80f8e855ed947f3d3c
+  AWSMobileClient: 21f4e54eb90a7bcab22e7cb22fd6043b8c6f93e1
+  AWSPluginsCore: 58fbe8752faffd4a3d94799d942ebb6f3bf96fe9
+  Starscream: 4bb2f9942274833f7b4d296a55504dcfc7edb7b0
+
+PODFILE CHECKSUM: 62d4179caebecd22eaf2d0a6d2258e6dfc0c2296
+
+COCOAPODS: 1.10.0

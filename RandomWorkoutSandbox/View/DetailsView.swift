@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Combine
 
 struct DetailsView: View {
     let equipment: Equipment
@@ -35,6 +36,18 @@ struct RandomMovementView: View {
                 Text(movement)
                 .font(.largeTitle)
                 .multilineTextAlignment(.center)
+                Spacer()
+                Button(action: {
+                    let something:AnyCancellable = WorkoutController().callLambdaFunc()
+                    
+                    
+                }) {
+                    HStack {
+                        Text("Call Lambda Func").accentColor(.white)
+                    }
+                }
+                .padding()
+                .background(Color.black)
                 Spacer()
                 Button(action:{
                     self.showAlert = true

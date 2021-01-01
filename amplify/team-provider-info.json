@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-randomworkoutsandbox-dev-162002-authRole",
+      "UnauthRoleArn": "arn:aws:iam::880898370811:role/amplify-randomworkoutsandbox-dev-162002-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::880898370811:role/amplify-randomworkoutsandbox-dev-162002-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-randomworkoutsandbox-dev-162002-deployment",
+      "UnauthRoleName": "amplify-randomworkoutsandbox-dev-162002-unauthRole",
+      "StackName": "amplify-randomworkoutsandbox-dev-162002",
+      "StackId": "arn:aws:cloudformation:us-east-1:880898370811:stack/amplify-randomworkoutsandbox-dev-162002/f2f61110-4bad-11eb-ad80-0a4789a43cff",
+      "AmplifyAppId": "dut8lxan6vyz6"
+    },
+    "categories": {
+      "auth": {
+        "cognitod4f93e9b": {}
+      }
+    }
+  }
+}

@@ -7,6 +7,8 @@
 
 import Foundation
 import UIKit
+import Amplify
+import Combine
 
 class WorkoutController: UIViewController {
     enum MovementDict: CaseIterable {
@@ -28,6 +30,30 @@ class WorkoutController: UIViewController {
     
     let OFFSET:Int = 3
     public var inMemoryMovements:Array<Movement> = Array<Movement>();
+    
+//    func callLambdaFunc() -> String {
+//        print("We are attempting to use Amplify to call Lambda...")
+//        var request = RESTRequest()
+//        Amplify.API.get(request: <#T##RESTRequest#>)
+//
+//
+//    }
+    
+    func callLambdaFunc() -> AnyCancellable {
+        let request = RESTRequest(path: "/movements")
+        let sink = Amplify.API.get(request: request)
+            .resultPublisher
+            .sink {
+                if case let .failure(apiError) = $0 {
+                    print("Failed", apiError)
+                }
+            }
+            receiveValue: { data in
+                let str = String(decoding: data, as: UTF8.self)
+                print("Success \(str)")
+            }
+        return sink
+    }
     
     // This function returns all the movements as an array of MovementObjects
     func getMovements() -> Array<Movement> {
