@@ -38,7 +38,7 @@ struct RandomMovementView: View {
                 .multilineTextAlignment(.center)
                 Spacer()
                 Button(action: {
-                    let something:AnyCancellable = WorkoutController().callLambdaFunc()
+                    let something = WorkoutController().callLambdaFunc()
                     
                     
                 }) {

@@ -39,20 +39,31 @@ class WorkoutController: UIViewController {
 //
 //    }
     
-    func callLambdaFunc() -> AnyCancellable {
+    func callLambdaFunc()  {
         let request = RESTRequest(path: "/movements")
-        let sink = Amplify.API.get(request: request)
-            .resultPublisher
-            .sink {
-                if case let .failure(apiError) = $0 {
-                    print("Failed", apiError)
+//        let sink = Amplify.API.get(request: request)
+//            .resultPublisher
+//            .sink {
+//                if case let .failure(apiError) = $0 {
+//                    print("Failed", apiError)
+//                }
+//            }
+//            receiveValue: { data in
+//                let str = String(decoding: data, as: UTF8.self)
+//                print("Success \(str)")
+//            }
+//        return sink
+        
+        Amplify.API.get(request: request) { result in
+            switch result {
+                case .success(let data):
+                        let str = String(decoding: data, as: UTF8.self)
+                        print("Success \(str)")
+                case .failure(let apiError):
+                        print("Failed", apiError)
                 }
-            }
-            receiveValue: { data in
-                let str = String(decoding: data, as: UTF8.self)
-                print("Success \(str)")
-            }
-        return sink
+
+        }
     }
     
     // This function returns all the movements as an array of MovementObjects
