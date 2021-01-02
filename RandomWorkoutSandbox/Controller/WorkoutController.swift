@@ -14,10 +14,10 @@ import RxSwift
 
 class WorkoutController: UIViewController, ObservableObject {
     
-    @Published public var inMemoryMovements:Array<Movement> = Array<Movement>();
-    @Published public var inMemoryEquipmentList:Array<Equipment> = Array<Equipment>();
-    @Published public var inMemoryMovementsById:Array<Movement> = Array<Movement>();
-    @Published public var randomMovement:String = ""
+    @Published public var inMemoryMovements:Array<Movement> = Array<Movement>();        // stores all the movements
+    @Published public var inMemoryEquipmentList:Array<Equipment> = Array<Equipment>();  // stores all the pieces of equipment
+    @Published public var inMemoryMovementsById:Array<Movement> = Array<Movement>();    // stores all the movements by a particular piece of equipment
+    @Published public var randomMovement:String = ""                                    // stores the random movement
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,6 +25,8 @@ class WorkoutController: UIViewController, ObservableObject {
     }
     
     func getMovements() -> Observable<Array<Movement>> {
+        // This function call an API Gateway endpoint that calls a Lambda function
+        // that returns all the values in a DynamoDB table name ios-app-table
         var allMovements = Array<Movement>();
         let request = RESTRequest(path: "/movements")
         return Observable.create { observer in
@@ -76,10 +78,10 @@ class WorkoutController: UIViewController, ObservableObject {
     }
 
     func getRandomMovement(equipmentId: String?) -> Observable<String> {
-
         return Observable.create { observer in
             print("get a random movement....")
             if(equipmentId == nil) {
+                // get a random movement from all movements - currently not being used
                 let numberOfMovements:Int = self.inMemoryMovements.count
                 let randomIndex = Int.random(in: 0..<numberOfMovements)
                 DispatchQueue.main.async {
@@ -88,6 +90,7 @@ class WorkoutController: UIViewController, ObservableObject {
                 observer.onNext(self.inMemoryMovements[randomIndex].movement)
             }
             else {
+                // get a random movement from movements with equipmentId of whatever was passed in
                 let movementsByEqId:Array<Movement> = self.inMemoryMovementsById
                 let numberOfMovements:Int = movementsByEqId.count
                 let randomIndex = Int.random(in: 0..<numberOfMovements)
@@ -102,6 +105,11 @@ class WorkoutController: UIViewController, ObservableObject {
     }
     
     func getAllEquipmentList() {
+        // break out of the function if the equipment list has already been built
+        if(self.inMemoryEquipmentList.count > 0) {
+            return
+        }
+        // Builds out the equipment list from all the movements
         var eqNameArray = Array<String>()
         var returnArray = Array<Equipment>()
         for movement in inMemoryMovements {
@@ -117,8 +125,9 @@ class WorkoutController: UIViewController, ObservableObject {
     }
     
     func getMovementsByEqId(_ id:String) -> Observable<Array<Movement>> {
+        // Builds out a list of movements based on a particular equipment item the person chose
         return Observable.create { observer in
-            if(self.inMemoryMovementsById.count > 0) {
+            if(self.inMemoryMovementsById.count > 0 && self.inMemoryMovementsById.first?.equipment.id == id) {
                 // if the movements API call has already happened and been loaded
                 observer.onNext(self.inMemoryMovementsById )
                 return Disposables.create()
