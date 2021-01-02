@@ -36,6 +36,11 @@ class WorkoutController: UIViewController, ObservableObject {
     @Published public var inMemoryMovementsById:Array<Movement> = Array<Movement>();
     @Published public var randomMovement:String = ""
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        print("WorkoutController initialized...")
+    }
+    
     func getMovements() -> Observable<Array<Movement>> {
         var allMovements = Array<Movement>();
         let request = RESTRequest(path: "/movements")
@@ -82,22 +87,25 @@ class WorkoutController: UIViewController, ObservableObject {
     }
 
     func getRandomMovement(equipmentId: Int = -1) -> Observable<String> {
-        print("get a random movement....")
+
         return Observable.create { observer in
+            print("get a random movement....")
             if(equipmentId == -1) {
                 let numberOfMovements:Int = self.inMemoryMovements.count
                 let randomIndex = Int.random(in: 0..<numberOfMovements)
-                self.randomMovement = self.inMemoryMovements[randomIndex].movement
+                DispatchQueue.main.async {
+                    self.randomMovement = self.inMemoryMovements[randomIndex].movement
+                }
                 observer.onNext(self.inMemoryMovements[randomIndex].movement)
             }
             else {
-                self.getMovementsByEqId(equipmentId).subscribe(onNext: { theMovements in
-                    let movementsByEqId:Array<Movement> = theMovements
-                    let numberOfMovements:Int = movementsByEqId.count
-                    let randomIndex = Int.random(in: 0..<numberOfMovements)
+                let movementsByEqId:Array<Movement> = self.inMemoryMovementsById
+                let numberOfMovements:Int = movementsByEqId.count
+                let randomIndex = Int.random(in: 0..<numberOfMovements)
+                DispatchQueue.main.async {
                     self.randomMovement = movementsByEqId[randomIndex].movement
-                    observer.onNext(movementsByEqId[randomIndex].movement)
-                })
+                }
+                observer.onNext(movementsByEqId[randomIndex].movement)
             }
             observer.onCompleted()
             return Disposables.create()
@@ -121,17 +129,16 @@ class WorkoutController: UIViewController, ObservableObject {
     
     func getMovementsByEqId(_ id:Int) -> Observable<Array<Movement>> {
         return Observable.create { observer in
-            _ = self.getMovements().subscribe(onNext: { theMovements in
-                var returnArray = Array<Movement>();
-                for m in theMovements {
-                    if(m.equipment.id == id) {
-                        returnArray.append(m)
-                    }
+            var returnArray = Array<Movement>();
+            for m in self.inMemoryMovements {
+                if(m.equipment.id == id) {
+                    returnArray.append(m)
                 }
+            }
+            DispatchQueue.main.async {
                 self.inMemoryMovementsById = returnArray
-                observer.onNext(returnArray)
-                
-            })
+            }
+            observer.onNext(returnArray)
             observer.onCompleted()
             return Disposables.create()
         }

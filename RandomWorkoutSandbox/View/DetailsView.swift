@@ -10,6 +10,7 @@ import Combine
 
 struct DetailsView: View {
     let equipment: Equipment
+    let wc: WorkoutController
     var body: some View {
         VStack {
             Spacer()
@@ -19,7 +20,7 @@ struct DetailsView: View {
             }
             Equipment.Image(name: equipment.imageName)
             Spacer()
-            RandomMovementView(equipment: equipment, movement: Movement(equipment: equipment).movement)
+            RandomMovementView(equipment: equipment, wc: wc, movement: Movement(equipment: equipment).movement)
             Spacer()
         }.padding()
     }
@@ -27,9 +28,9 @@ struct DetailsView: View {
 
 struct RandomMovementView: View {
     let equipment: Equipment
+    let wc: WorkoutController
     @State public var movement: String
     @State private var showAlert: Bool = false
-    @ObservedObject var wc = WorkoutController()
     var body: some View {
         
         VStack {
@@ -45,13 +46,13 @@ struct RandomMovementView: View {
                         Text("Generate New Movement").accentColor(.white)
                     }
                 }.onAppear() {
-                    DispatchQueue.main.async {
-                        _ = wc.getMovementsByEqId(equipment.id).subscribe()
+                    _ = wc.getMovementsByEqId(equipment.id).subscribe(onNext: { mEqId in
+                        wc.inMemoryMovementsById = mEqId
                         _ = wc.getRandomMovement(equipmentId: equipment.id)
                             .subscribe(onNext: { m in
                              movement = m
                         })
-                    }
+                    })
                 }
                 .padding()
                 .background(Color.blue)
@@ -59,13 +60,10 @@ struct RandomMovementView: View {
                     .init(
                         title: .init("Generate new \(equipment.name.lowercased()) movement?"),
                           primaryButton: .default(.init("Yes")) {
-                            DispatchQueue.main.async {
-                                _ = wc.getMovementsByEqId(equipment.id).subscribe()
-                                _ = wc.getRandomMovement(equipmentId: equipment.id)
-                                    .subscribe(onNext: { m in
-                                     movement = m
-                                })
-                            }
+                            _ = wc.getRandomMovement(equipmentId: equipment.id)
+                                .subscribe(onNext: { m in
+                                 movement = m
+                            })
                           }, secondaryButton: .cancel())
 
                 })

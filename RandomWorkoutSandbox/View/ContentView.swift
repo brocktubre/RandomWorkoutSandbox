@@ -14,7 +14,7 @@ struct ContentView: View {
     var body: some View {
         NavigationView {
             List(wc.inMemoryEquipmentList) { equipment in
-                EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName))
+                EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName), wc: wc)
             }.navigationTitle("Equipment")
             .onAppear(){
                 _ = wc.getMovements().subscribe(onNext: { allMovements in
@@ -33,9 +33,10 @@ struct ContentView: View {
 
 struct EquipmentRow: View {
     let equipment: Equipment
+    let wc: WorkoutController
     var body: some View {
         NavigationLink(
-            destination: DetailsView(equipment: equipment)
+            destination: DetailsView(equipment: equipment, wc: wc)
             ) {
             HStack{
                 FavoriteButton(equipment: equipment)
@@ -50,7 +51,7 @@ struct EquipmentRow: View {
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
         List(EquipmentList().sortedEquipment) { equipment in
-            EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName))
+            EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName), wc: WorkoutController())
         }.previewInAllColorSchemes
     }
 }
