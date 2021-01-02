@@ -10,21 +10,21 @@ class Movement {
     var repType: String
     var dynamic: Bool
     var equipment: Equipment
-    var id: Int
+    var id: String
     
     init(   movement: String = "wall balls",
             difficulty: Int = -1,
-            repType: String = "nunber",
+            repType: String = "number",
             dynamic: Bool = true,
             equipment: Equipment,
-            id: Int = -1) {
+            id: String = "-1") {
         
         self.movement = movement
         self.difficulty = difficulty
         self.repType = repType
         self.dynamic = dynamic
         self.id = id
-        self.equipment = Equipment(name: "wall ball", id: -1, imageName: "wallball")
+        self.equipment = Equipment(name: "wall ball", id: "-1", imageName: "wallball")
     }
     
     func toString() -> String {

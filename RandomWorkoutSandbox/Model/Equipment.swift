@@ -10,11 +10,11 @@ import Combine
 class Equipment: ObservableObject {
     
     var name: String
-    var id: Int
+    var id: String
     var imageName: String
     @Published var favorite: Bool
     
-    init(name: String = "wall ball", id: Int = -1, imageName: String = "wallball", favorite: Bool = false) {
+    init(name: String = "wall ball", id: String = "-1", imageName: String = "wallball", favorite: Bool = false) {
         self.name = name
         self.id = id
         self.imageName = imageName

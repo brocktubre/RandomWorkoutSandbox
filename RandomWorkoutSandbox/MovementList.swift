@@ -10,7 +10,7 @@ struct MovementList {
 
   /// An in-memory cache of the manually-sorted books that are persistently stored.
   private var movementCache: [Movement] = [
-        .init(movement: "wall balls", difficulty: 1, repType: "count", dynamic: false, equipment: Equipment(), id: 0)
+        .init(movement: "wall balls", difficulty: 1, repType: "count", dynamic: false, equipment: Equipment(), id: "asdf")
   ]
 }
 

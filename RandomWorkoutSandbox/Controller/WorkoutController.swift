@@ -53,13 +53,13 @@ class WorkoutController: UIViewController, ObservableObject {
                             {
                                 for movement in jsonArray {
                                     let newMovement = Movement(equipment: Equipment())
-                                    newMovement.equipment.id = movement["equipment.id"] as! Int
+                                    newMovement.equipment.id = movement["equipment.id"] as! String
                                     newMovement.equipment.name = movement["equipment.name"] as! String
                                     
                                     let imageName = newMovement.equipment.name.lowercased().replacingOccurrences(of: " ", with: "")
                                     newMovement.equipment.imageName = imageName
                                     
-                                    newMovement.id = movement["id"] as! Int
+                                    newMovement.id = movement["id"] as! String
                                     newMovement.movement = movement["movement"] as! String
                                     newMovement.difficulty = movement["difficulty"] as! Int
                                     newMovement.repType = movement["repType"] as! String
@@ -70,6 +70,7 @@ class WorkoutController: UIViewController, ObservableObject {
                                 DispatchQueue.main.async {
                                     self.inMemoryMovements = allMovements
                                 }
+                                print("Total number of movements loaded into memory: \(allMovements.count)")
                                 observer.onNext(allMovements)
                                 observer.onCompleted()
                             } else {
@@ -86,11 +87,11 @@ class WorkoutController: UIViewController, ObservableObject {
         }
     }
 
-    func getRandomMovement(equipmentId: Int = -1) -> Observable<String> {
+    func getRandomMovement(equipmentId: String?) -> Observable<String> {
 
         return Observable.create { observer in
             print("get a random movement....")
-            if(equipmentId == -1) {
+            if(equipmentId == nil) {
                 let numberOfMovements:Int = self.inMemoryMovements.count
                 let randomIndex = Int.random(in: 0..<numberOfMovements)
                 DispatchQueue.main.async {
@@ -127,7 +128,7 @@ class WorkoutController: UIViewController, ObservableObject {
         }
     }
     
-    func getMovementsByEqId(_ id:Int) -> Observable<Array<Movement>> {
+    func getMovementsByEqId(_ id:String) -> Observable<Array<Movement>> {
         return Observable.create { observer in
             var returnArray = Array<Movement>();
             for m in self.inMemoryMovements {
