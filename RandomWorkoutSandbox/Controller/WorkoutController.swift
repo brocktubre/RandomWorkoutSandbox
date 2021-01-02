@@ -45,6 +45,11 @@ class WorkoutController: UIViewController, ObservableObject {
         var allMovements = Array<Movement>();
         let request = RESTRequest(path: "/movements")
         return Observable.create { observer in
+            if(self.inMemoryMovements.count > 0) {
+                // if the movements API call has already happened and been loaded
+                observer.onNext(self.inMemoryMovements)
+                return Disposables.create()
+            }
             Amplify.API.get(request: request) { [self] result in
                 switch result {
                     case .success(let data):
@@ -130,6 +135,11 @@ class WorkoutController: UIViewController, ObservableObject {
     
     func getMovementsByEqId(_ id:String) -> Observable<Array<Movement>> {
         return Observable.create { observer in
+            if(self.inMemoryMovementsById.count > 0) {
+                // if the movements API call has already happened and been loaded
+                observer.onNext(self.inMemoryMovementsById )
+                return Disposables.create()
+            }
             var returnArray = Array<Movement>();
             for m in self.inMemoryMovements {
                 if(m.equipment.id == id) {

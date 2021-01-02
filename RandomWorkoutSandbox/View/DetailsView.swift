@@ -60,9 +60,12 @@ struct RandomMovementView: View {
                     .init(
                         title: .init("Generate new \(equipment.name.lowercased()) movement?"),
                           primaryButton: .default(.init("Yes")) {
-                            _ = wc.getRandomMovement(equipmentId: equipment.id)
-                                .subscribe(onNext: { m in
-                                 movement = m
+                            _ = wc.getMovementsByEqId(equipment.id).subscribe(onNext: { mEqId in
+                                wc.inMemoryMovementsById = mEqId
+                                _ = wc.getRandomMovement(equipmentId: equipment.id)
+                                    .subscribe(onNext: { m in
+                                     movement = m
+                                })
                             })
                           }, secondaryButton: .cancel())
 
