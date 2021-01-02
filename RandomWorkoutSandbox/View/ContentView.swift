@@ -17,7 +17,7 @@ struct ContentView: View {
                 EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName), wc: wc)
             }.navigationTitle("Equipment")
             .onAppear(){
-                _ = wc.getMovements().subscribe(onNext: { allMovements in
+                wc.getMovements().subscribe(onNext: { allMovements in
                     DispatchQueue.main.async {
                             wc.inMemoryMovements = allMovements
                             wc.getAllEquipmentList()
