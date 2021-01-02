@@ -6,13 +6,25 @@
 //
 
 import SwiftUI
+import RxSwift
 
 struct ContentView: View {
+    @ObservedObject var wc = WorkoutController()
+    
     var body: some View {
         NavigationView {
-            List(WorkoutController().getAllEquipmentList()) { equipment in
+            List(wc.inMemoryEquipmentList) { equipment in
                 EquipmentRow(equipment: .init(name: equipment.name, id: equipment.id, imageName: equipment.imageName))
             }.navigationTitle("Equipment")
+            .onAppear(){
+                _ = wc.getMovements().subscribe(onNext: { allMovements in
+                    DispatchQueue.main.async {
+                            wc.inMemoryMovements = allMovements
+                            wc.getAllEquipmentList()
+
+                    }
+                })
+            }
         }
     }
         

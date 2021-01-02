@@ -29,6 +29,7 @@ struct RandomMovementView: View {
     let equipment: Equipment
     @State public var movement: String
     @State private var showAlert: Bool = false
+    @ObservedObject var wc = WorkoutController()
     var body: some View {
         
         VStack {
@@ -44,7 +45,13 @@ struct RandomMovementView: View {
                         Text("Generate New Movement").accentColor(.white)
                     }
                 }.onAppear() {
-                    movement = WorkoutController().getRandomMovement(equipmentId: equipment.id)
+                    DispatchQueue.main.async {
+                        _ = wc.getMovementsByEqId(equipment.id).subscribe()
+                        _ = wc.getRandomMovement(equipmentId: equipment.id)
+                            .subscribe(onNext: { m in
+                             movement = m
+                        })
+                    }
                 }
                 .padding()
                 .background(Color.blue)
@@ -52,7 +59,13 @@ struct RandomMovementView: View {
                     .init(
                         title: .init("Generate new \(equipment.name.lowercased()) movement?"),
                           primaryButton: .default(.init("Yes")) {
-                            movement = WorkoutController().getRandomMovement(equipmentId: equipment.id)
+                            DispatchQueue.main.async {
+                                _ = wc.getMovementsByEqId(equipment.id).subscribe()
+                                _ = wc.getRandomMovement(equipmentId: equipment.id)
+                                    .subscribe(onNext: { m in
+                                     movement = m
+                                })
+                            }
                           }, secondaryButton: .cancel())
 
                 })
