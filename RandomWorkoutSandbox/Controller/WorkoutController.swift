@@ -14,23 +14,6 @@ import RxSwift
 
 class WorkoutController: UIViewController, ObservableObject {
     
-    enum MovementDict: CaseIterable {
-        case DUMBBELL
-        case BODYWEIGHT
-        case SANDBAG
-        case GHD
-        case WALL
-        case WALLBALL
-        case ROPE
-        case JUMP_ROPE
-        case PULLUP_BAR
-        case BARBELL
-        case RINGS
-        case BOX
-        case MACHINE
-        case KETTLEBELL
-    }
-    
     @Published public var inMemoryMovements:Array<Movement> = Array<Movement>();
     @Published public var inMemoryEquipmentList:Array<Equipment> = Array<Equipment>();
     @Published public var inMemoryMovementsById:Array<Movement> = Array<Movement>();
