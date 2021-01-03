@@ -14,7 +14,10 @@ struct ConfirmationView: View {
     var body: some View {
         NavigationView {
             VStack {
-                WelcomeText(text: "Enter Confirmation Code")
+                WelcomeText(text: "Enter Confirmation Code", subText: "Check your email for your confirmation code.")
+                Text(sessionManagerService.confirmationErrorMessage)
+                    .foregroundColor(Color.red)
+                    .fontWeight(.heavy)
                 TextField("Confirmation Code", text: $confirmationCode)
                     .padding()
                     .background(lightGreyColor)
@@ -23,8 +26,9 @@ struct ConfirmationView: View {
                 Button(action:{
                     sessionManagerService.confirm(username: username, code: confirmationCode)
                 }) {
-                    LoginButtonContent(text: "Confirm", color: Color.green)
-                }
+                    AuthButtonConent(text: "CONFIRM")
+                        .background(Capsule().fill(iconGreen))
+                }.padding(.bottom, 20)
             }.padding()
             
         }

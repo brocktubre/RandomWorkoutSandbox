@@ -16,7 +16,9 @@ enum AuthState {
 
 final class SessionManagerService: ObservableObject {
     @Published var authState: AuthState = .login
-    @Published var errorMessage: String = ""
+    @Published var loginErrorMessage: String = ""
+    @Published var signupErrorMessage: String = ""
+    @Published var confirmationErrorMessage: String = ""
     
     func getCurrentAuthUser() {
         let user = Amplify.Auth.getCurrentUser()
@@ -56,6 +58,9 @@ final class SessionManagerService: ObservableObject {
                         }
                     }
                 case .failure(let error):
+                    DispatchQueue.main.async {
+                        self!.signupErrorMessage = error.errorDescription
+                    }
                     print("Sign up error", error)
             }
         }
@@ -72,6 +77,9 @@ final class SessionManagerService: ObservableObject {
                         }
                     }
                 case .failure(let error):
+                    DispatchQueue.main.async {
+                        self!.confirmationErrorMessage = error.errorDescription
+                    }
                     print("An error occurred while confirming sign up \(error)")
             }
         }
@@ -89,7 +97,7 @@ final class SessionManagerService: ObservableObject {
                 }
                 case .failure(let error):
                     DispatchQueue.main.async {
-                        self!.errorMessage = error.errorDescription
+                        self!.loginErrorMessage = error.errorDescription
                     }
                     print("An error occurred while signing in \(error)")
             }
@@ -112,6 +120,8 @@ final class SessionManagerService: ObservableObject {
     
     func completeSignOut() {
         self.getCurrentAuthUser()
-        self.errorMessage = ""
+        self.loginErrorMessage = ""
+        self.signupErrorMessage = ""
+        self.confirmationErrorMessage = ""
     }
 }

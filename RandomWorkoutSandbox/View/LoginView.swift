@@ -8,6 +8,7 @@
 import SwiftUI
 
 let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
+let iconGreen = Color(red: 18.0/255.0, green: 168.0/255.0, blue: 157.0/255.0, opacity: 1.0)
 
 
 struct LoginView: View {
@@ -21,41 +22,45 @@ struct LoginView: View {
     
     var body: some View {
             VStack{
-                Spacer()
+                WelcomeText(text: "Welcome back!", subText: "Please login to your account.")
                 UserImage()
-                Text(sessionManagerService.errorMessage)
+                Text(sessionManagerService.loginErrorMessage)
                     .foregroundColor(Color.red)
                     .fontWeight(.heavy)
-                TextField("Username", text: $username)
-                    .padding()
-                    .background(lightGreyColor)
-                    .cornerRadius(5.0)
-                    .padding(.bottom, 20)
-                    .autocapitalization(.none)
-                SecureField("Password", text: $password)
-                    .padding()
-                    .background(lightGreyColor)
-                    .cornerRadius(5.0)
-                    .padding(.bottom, 20)
-                    .autocapitalization(.none)
+                HStack {
+                    Image(systemName: "person")
+                        .foregroundColor(.secondary)
+                    TextField("Username", text: $username).autocapitalization(.none)
+                    
+                }.padding()
+                .background(Capsule().fill(lightGreyColor))
+                HStack {
+                    Image(systemName: "lock")
+                        .foregroundColor(.secondary)
+                    SecureField("Password", text: $password).autocapitalization(.none)
+                }.padding()
+                .background(Capsule().fill(lightGreyColor))
                 Button(action:{
                     sessionManagerService.signIn(username: username, password: password)
                 }) {
-                    LoginButtonContent(text: "LOGIN", color: Color.green)
+                    AuthButtonConent(text: "LOGIN")
+                        .background(Capsule().fill(iconGreen))
                 }.padding(.bottom, 20)
                 NavigationLink(
                     destination: SignUpView().environmentObject(sessionManagerService),
                     isActive: $isShowingSignUpView) { EmptyView() }
                 Button(action: {
                     self.isShowingSignUpView = true
-//                    sessionManagerService.showSignUp()
                 }) {
-                    Text("Need to create a new account?")
-                        .foregroundColor(Color.blue)
+                    HStack {
+                        Text("Don't have an account?")
+                            .foregroundColor(Color.black)
+                        Text("Create one.")
+                            .foregroundColor(iconGreen)
+                    }
                 }
                 Spacer()
             }.padding()
-            .navigationBarTitle("Login")
     }
 }
 
@@ -66,8 +71,7 @@ struct LoginView_Previews: PreviewProvider {
     static var previews: some View {
         NavigationView{
             VStack{
-                Spacer()
-                WelcomeText(text: "Login")
+                WelcomeText(text: "Welcome back!", subText: "Please login to your account.")
                 UserImage()
                 Text("Username")
                     .padding()
@@ -80,12 +84,12 @@ struct LoginView_Previews: PreviewProvider {
                     .cornerRadius(5.0)
                     .padding(.bottom, 20)
                 Spacer()
-                Button(action:
-                        {
+                Button(action:{
                             print("login user")
-                        }) {
-                    LoginButtonContent(text: "LOGIN", color: Color.green)
-                }
+                }) {
+                    AuthButtonConent(text: "LOGIN")
+                        .background(Capsule().fill(iconGreen))
+                }.padding(.bottom, 20)
             }.padding()
         }
         
@@ -95,37 +99,39 @@ struct LoginView_Previews: PreviewProvider {
 
 struct WelcomeText: View {
     var text: String
+    var subText: String
     var body: some View {
-        Text(text)
-            .font(.title)
-            .fontWeight(.semibold)
-            .padding(.bottom, 20)
+        VStack(alignment: .center) {
+            Text(text)
+                .font(.title)
+                .fontWeight(.semibold)
+                .padding(.bottom, 10)
+            Text(subText)
+                .font(.subheadline)
+                .padding(.bottom, 20)
+                .foregroundColor(.secondary)
+        }
     }
 }
 
 struct UserImage: View {
     var body: some View {
-        Image(systemName: "person.crop.circle")
+        Image("login-icon")
             .resizable()
             .aspectRatio(contentMode: .fill)
             .frame(width: 150, height: 150)
             .clipped()
-            .cornerRadius(150)
             .padding(.bottom, 20)
             .foregroundColor(Color.blue)
     }
 }
 
-struct LoginButtonContent: View {
+struct AuthButtonConent: View {
     var text: String
-    var color: Color
     var body: some View {
         Text(text)
             .font(.headline)
             .foregroundColor(.white)
-            .padding()
-            .frame(width: 220, height: 60)
-            .background(color)
-            .cornerRadius(15.0)
+            .frame(minWidth: 0, maxWidth: .infinity, minHeight: 50)
     }
 }
