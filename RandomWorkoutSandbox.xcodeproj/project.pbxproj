@@ -21,8 +21,10 @@
 		009EB249259A374E0007358A /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 009EB248259A374E0007358A /* Preview Assets.xcassets */; };
 		009EB252259A9E570007358A /* Movement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB251259A9E570007358A /* Movement.swift */; };
 		009EB25D259AA3BA0007358A /* WorkoutController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 009EB25C259AA3BA0007358A /* WorkoutController.swift */; };
-		00A2C58825A1718E008E92DA /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A2C58725A1718E008E92DA /* AuthController.swift */; };
 		00A2C58B25A17205008E92DA /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00A2C58A25A17205008E92DA /* LoginView.swift */; };
+		00D5CA6A25A1FBC900A88E40 /* SignUpView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CA6925A1FBC900A88E40 /* SignUpView.swift */; };
+		00D5CA6D25A1FEB400A88E40 /* ConfirmationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CA6C25A1FEB400A88E40 /* ConfirmationView.swift */; };
+		00D5CA7725A2012F00A88E40 /* SessionManagerService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00D5CA7625A2012F00A88E40 /* SessionManagerService.swift */; };
 		5218C997E59A127C864C807D /* Pods_RandomWorkoutSandbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 661A712E664FF388FF9CC10C /* Pods_RandomWorkoutSandbox.framework */; };
 /* End PBXBuildFile section */
 
@@ -41,8 +43,10 @@
 		009EB24A259A374E0007358A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		009EB251259A9E570007358A /* Movement.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movement.swift; sourceTree = "<group>"; };
 		009EB25C259AA3BA0007358A /* WorkoutController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WorkoutController.swift; sourceTree = "<group>"; };
-		00A2C58725A1718E008E92DA /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		00A2C58A25A17205008E92DA /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
+		00D5CA6925A1FBC900A88E40 /* SignUpView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpView.swift; sourceTree = "<group>"; };
+		00D5CA6C25A1FEB400A88E40 /* ConfirmationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmationView.swift; sourceTree = "<group>"; };
+		00D5CA7625A2012F00A88E40 /* SessionManagerService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SessionManagerService.swift; sourceTree = "<group>"; };
 		661A712E664FF388FF9CC10C /* Pods_RandomWorkoutSandbox.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RandomWorkoutSandbox.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC5591342D914D7BB39648EE /* amplifytools.xcconfig */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 4; includeInIndex = 0; lastKnownFileType = text.xcconfig; path = amplifytools.xcconfig; sourceTree = "<group>"; };
 		C358C16400864E8C9A495229 /* amplifyconfiguration.json */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; path = amplifyconfiguration.json; sourceTree = "<group>"; };
@@ -85,6 +89,7 @@
 		009EB240259A374B0007358A /* RandomWorkoutSandbox */ = {
 			isa = PBXGroup;
 			children = (
+				00D5CA7525A2011E00A88E40 /* Service */,
 				009EB241259A374B0007358A /* RandomWorkoutSandboxApp.swift */,
 				009EB25A259AA0840007358A /* Controller */,
 				009EB259259AA07F0007358A /* View */,
@@ -123,6 +128,8 @@
 				003C3DC2259CB9120087E52C /* EquipmentView.swift */,
 				003C3DD6259CF82C0087E52C /* DetailsView.swift */,
 				00A2C58A25A17205008E92DA /* LoginView.swift */,
+				00D5CA6925A1FBC900A88E40 /* SignUpView.swift */,
+				00D5CA6C25A1FEB400A88E40 /* ConfirmationView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -131,9 +138,16 @@
 			isa = PBXGroup;
 			children = (
 				009EB25C259AA3BA0007358A /* WorkoutController.swift */,
-				00A2C58725A1718E008E92DA /* AuthController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		00D5CA7525A2011E00A88E40 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				00D5CA7625A2012F00A88E40 /* SessionManagerService.swift */,
+			);
+			path = Service;
 			sourceTree = "<group>";
 		};
 		5CC0A5C8ED220EE4448171E5 /* Pods */ = {
@@ -283,10 +297,12 @@
 				009EB25D259AA3BA0007358A /* WorkoutController.swift in Sources */,
 				003C3DD7259CF82C0087E52C /* DetailsView.swift in Sources */,
 				003C3DD0259CF41C0087E52C /* EquipmentList.swift in Sources */,
-				00A2C58825A1718E008E92DA /* AuthController.swift in Sources */,
 				00830BC0259E20A7000C6D3D /* MovementList.swift in Sources */,
 				00A2C58B25A17205008E92DA /* LoginView.swift in Sources */,
 				003C3DBF259CB2090087E52C /* Equipment.swift in Sources */,
+				00D5CA6A25A1FBC900A88E40 /* SignUpView.swift in Sources */,
+				00D5CA7725A2012F00A88E40 /* SessionManagerService.swift in Sources */,
+				00D5CA6D25A1FEB400A88E40 /* ConfirmationView.swift in Sources */,
 				003C3D95259ADB390087E52C /* MovementView.swift in Sources */,
 				009EB244259A374B0007358A /* EquipmentListView.swift in Sources */,
 				003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */,

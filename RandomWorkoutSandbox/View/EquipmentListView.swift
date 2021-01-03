@@ -10,12 +10,13 @@ import RxSwift
 import Amplify
 
 struct EquipmentListView: View {
+    @EnvironmentObject var sessionManagerService: SessionManagerService
     @ObservedObject var wc = WorkoutController()
     @ObservedObject var equipment = Equipment()
     @State var authStatus: String?
+    let user: AuthUser
     
     var body: some View {
-        NavigationView {
             List(wc.inMemoryEquipmentList) { equipment in
                 EquipmentRow(equipment: equipment, wc: wc)
             }.navigationTitle("Equipment")
@@ -27,14 +28,6 @@ struct EquipmentListView: View {
                     }
                 })
             }
-        }
-        
-//        VStack {
-//           if let authStatus = self.authStatus {
-//               Text(authStatus).padding()
-//           }
-//           Button("Get Status", action: checkAuthStatus).padding()
-//       }
 
     }
     

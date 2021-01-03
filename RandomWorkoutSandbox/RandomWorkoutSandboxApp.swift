@@ -11,15 +11,31 @@ import AmplifyPlugins
 
 @main
 struct RandomWorkoutSandboxApp: App {
+    @ObservedObject var sessionManagerService = SessionManagerService()
     
     init() {
         configureAmplify()
+        sessionManagerService.getCurrentAuthUser()
     }
     
     var body: some Scene {
         WindowGroup {
-//            EquipmentListView()
-            LoginView()
+            NavigationView {
+                switch sessionManagerService.authState {
+                    case .login:
+                        LoginView()
+                            .environmentObject(sessionManagerService)
+                    case .signUp:
+                        SignUpView()
+                            .environmentObject(sessionManagerService)
+                    case .confirmCode(let username):
+                        ConfirmationView(username: username)
+                            .environmentObject(sessionManagerService)
+                    case .session(let user):
+                        EquipmentListView(user: user)
+                            .environmentObject(sessionManagerService)
+                }
+            }
         }
     }
     
