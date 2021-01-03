@@ -32,12 +32,12 @@ struct LoginView: View {
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
             Button(action:{
-                ac.login(username: username, password: password)
+                ac.signIn(username: username, password: password)
             }) {
                 LoginButtonContent()
             }.padding(.bottom, 20)
             Button(action:{
-                //
+                // TODO implement sign up
             }) {
                 Text("Need to create a new account?")
                     .foregroundColor(Color.blue)

@@ -12,10 +12,17 @@ import RxSwift
 
 class AuthController: UIViewController {
     
-    func login(username: String, password: String) {
-        print("Login user...")
-        print("UN: \(username)")
-        print("PASS: \(password)")
+    func signIn(username: String, password: String) -> AnyCancellable {
+        Amplify.Auth.signIn(username: username, password: password)
+            .resultPublisher
+            .sink {
+                if case let .failure(authError) = $0 {
+                    print("Sign in failed \(authError)")
+                }
+            }
+            receiveValue: { _ in
+                print("Sign in succeeded")
+            }
     }
     
     

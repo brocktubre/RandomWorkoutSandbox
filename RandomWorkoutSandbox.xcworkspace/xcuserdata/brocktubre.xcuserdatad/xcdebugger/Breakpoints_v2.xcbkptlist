@@ -20,5 +20,69 @@
             landmarkType = "24">
          </BreakpointContent>
       </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "66D5C893-B36B-4E8F-97C7-36D89F77AD26"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RandomWorkoutSandbox/Controller/AuthController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
+            landmarkName = "signIn(username:password:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "17BF978B-8255-4622-9810-990C8BAE9BCF"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RandomWorkoutSandbox/Controller/AuthController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "23"
+            endingLineNumber = "23"
+            landmarkName = "signIn(username:password:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "17BF978B-8255-4622-9810-990C8BAE9BCF - 2ae8d5fce6a15e91"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "RandomWorkoutSandbox.AuthController.signIn(username: Swift.String, password: Swift.String) -&gt; Combine.AnyCancellable"
+                  moduleName = "RandomWorkoutSandbox"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/brocktubre/Desktop/Projects/RandomWorkoutSandbox/RandomWorkoutSandbox/Controller/AuthController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "23"
+                  endingLineNumber = "23"
+                  offsetFromSymbolStart = "569">
+               </Location>
+               <Location
+                  uuid = "17BF978B-8255-4622-9810-990C8BAE9BCF - 5ab1cecd470405ab"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #2 (Amplify.AuthSignInResult) -&gt; () in RandomWorkoutSandbox.AuthController.signIn(username: Swift.String, password: Swift.String) -&gt; Combine.AnyCancellable"
+                  moduleName = "RandomWorkoutSandbox"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/brocktubre/Desktop/Projects/RandomWorkoutSandbox/RandomWorkoutSandbox/Controller/AuthController.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "24"
+                  endingLineNumber = "24"
+                  offsetFromSymbolStart = "8">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
    </Breakpoints>
 </Bucket>
