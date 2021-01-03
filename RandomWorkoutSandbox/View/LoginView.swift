@@ -18,6 +18,7 @@ struct LoginView: View {
     
     var body: some View {
         VStack{
+            Spacer()
             WelcomeText()
             UserImage()
             TextField("Username", text: $username)
@@ -30,12 +31,18 @@ struct LoginView: View {
                 .background(lightGreyColor)
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
-            Button(action:
-                    {
-                        ac.login(username: username, password: password)
-                    }) {
-                    LoginButtonContent()
+            Button(action:{
+                ac.login(username: username, password: password)
+            }) {
+                LoginButtonContent()
+            }.padding(.bottom, 20)
+            Button(action:{
+                //
+            }) {
+                Text("Need to create a new account?")
+                    .foregroundColor(Color.blue)
             }
+            Spacer()
         }.padding()
     }
 }
@@ -46,6 +53,7 @@ struct LoginView_Previews: PreviewProvider {
     
     static var previews: some View {
         VStack{
+            Spacer()
             WelcomeText()
             UserImage()
             Text("Username")
@@ -58,7 +66,7 @@ struct LoginView_Previews: PreviewProvider {
                 .background(lightGreyColor)
                 .cornerRadius(5.0)
                 .padding(.bottom, 20)
-            
+            Spacer()
             Button(action:
                     {
                         print("login user")
@@ -88,6 +96,7 @@ struct UserImage: View {
             .clipped()
             .cornerRadius(150)
             .padding(.bottom, 75)
+            .foregroundColor(Color.blue)
     }
 }
 
