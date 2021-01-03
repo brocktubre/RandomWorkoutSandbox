@@ -18,7 +18,8 @@ struct RandomWorkoutSandboxApp: App {
     
     var body: some Scene {
         WindowGroup {
-            ContentView()
+//            EquipmentListView()
+            LoginView()
         }
     }
     
