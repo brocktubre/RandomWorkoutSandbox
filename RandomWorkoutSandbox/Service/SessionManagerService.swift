@@ -16,6 +16,7 @@ enum AuthState {
 
 final class SessionManagerService: ObservableObject {
     @Published var authState: AuthState = .login
+    @Published var errorMessage: String = ""
     
     func getCurrentAuthUser() {
         let user = Amplify.Auth.getCurrentUser()
@@ -83,10 +84,13 @@ final class SessionManagerService: ObservableObject {
                     print("User successfully signed in \(signInResult)")
                 if(signInResult.isSignedIn) {
                     DispatchQueue.main.async {
-                        self?.getCurrentAuthUser()
+                        self?.completeSignOut()
                     }
                 }
                 case .failure(let error):
+                    DispatchQueue.main.async {
+                        self!.errorMessage = error.errorDescription
+                    }
                     print("An error occurred while signing in \(error)")
             }
         }
@@ -104,5 +108,10 @@ final class SessionManagerService: ObservableObject {
             }
             
         }
+    }
+    
+    func completeSignOut() {
+        self.getCurrentAuthUser()
+        self.errorMessage = ""
     }
 }

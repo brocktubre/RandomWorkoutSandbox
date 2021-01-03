@@ -17,13 +17,15 @@ struct LoginView: View {
     @State var username: String = ""
     @State var password: String = ""
     
-    @State var isActive: Bool = false
+    @State var isShowingSignUpView = false
     
     var body: some View {
             VStack{
                 Spacer()
-                WelcomeText(text: "Login")
                 UserImage()
+                Text(sessionManagerService.errorMessage)
+                    .foregroundColor(Color.red)
+                    .fontWeight(.heavy)
                 TextField("Username", text: $username)
                     .padding()
                     .background(lightGreyColor)
@@ -41,18 +43,19 @@ struct LoginView: View {
                 }) {
                     LoginButtonContent(text: "LOGIN", color: Color.green)
                 }.padding(.bottom, 20)
+                NavigationLink(
+                    destination: SignUpView().environmentObject(sessionManagerService),
+                    isActive: $isShowingSignUpView) { EmptyView() }
                 Button(action: {
-                    sessionManagerService.showSignUp()
+                    self.isShowingSignUpView = true
+//                    sessionManagerService.showSignUp()
                 }) {
                     Text("Need to create a new account?")
                         .foregroundColor(Color.blue)
                 }
-//                NavigationLink(destination: SignUpView(), label: {
-//                        Text("Need to create a new account?")
-//                            .foregroundColor(Color.blue)
-//                })
                 Spacer()
             }.padding()
+            .navigationBarTitle("Login")
     }
 }
 
@@ -94,7 +97,7 @@ struct WelcomeText: View {
     var text: String
     var body: some View {
         Text(text)
-            .font(.largeTitle)
+            .font(.title)
             .fontWeight(.semibold)
             .padding(.bottom, 20)
     }
@@ -108,7 +111,7 @@ struct UserImage: View {
             .frame(width: 150, height: 150)
             .clipped()
             .cornerRadius(150)
-            .padding(.bottom, 75)
+            .padding(.bottom, 20)
             .foregroundColor(Color.blue)
     }
 }

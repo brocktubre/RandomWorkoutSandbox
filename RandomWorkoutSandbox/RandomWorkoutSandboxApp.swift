@@ -20,25 +20,28 @@ struct RandomWorkoutSandboxApp: App {
     
     var body: some Scene {
         WindowGroup {
-            NavigationView {
                 switch sessionManagerService.authState {
                     case .login:
-                        LoginView()
-                            .environmentObject(sessionManagerService)
-                            .navigationBarHidden(true)
+                        NavigationView {
+                            LoginView()
+                                .environmentObject(sessionManagerService)
+                        }
                     case .signUp:
-                        SignUpView()
-                            .environmentObject(sessionManagerService)
-                            .navigationBarHidden(true)
+                        NavigationView {
+                            SignUpView()
+                                .environmentObject(sessionManagerService)
+                        }
                     case .confirmCode(let username):
-                        ConfirmationView(username: username)
-                            .environmentObject(sessionManagerService)
-                            .navigationBarHidden(true)
+                        NavigationView {
+                            ConfirmationView(username: username)
+                                .environmentObject(sessionManagerService)
+                        }
                     case .session(let user):
-                        EquipmentListView(user: user)
-                            .environmentObject(sessionManagerService)
+                        NavigationView {
+                            EquipmentListView(user: user)
+                                .environmentObject(sessionManagerService)
+                        }
                 }
-            }
         }
     }
     

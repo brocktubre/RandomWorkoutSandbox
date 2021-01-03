@@ -12,10 +12,12 @@ struct SignUpView: View {
     @State var username = ""
     @State var email = ""
     @State var password = ""
+    @State var isLoginShowing = false
     
     var body: some View {
             VStack{
-                WelcomeText(text: "Sign Up")
+                Spacer()
+                WelcomeText(text: "Create a new account.")
                 TextField("Username", text: $username)
                     .padding()
                     .background(lightGreyColor)
@@ -39,18 +41,19 @@ struct SignUpView: View {
                 }) {
                     LoginButtonContent(text: "SIGN UP", color: Color.blue)
                 }.padding(.bottom, 20)
+                NavigationLink(destination: LoginView().environmentObject(sessionManagerService), isActive: $isLoginShowing) { EmptyView() }
                 Button(action: {
-                    sessionManagerService.showLogin()
+                    self.isLoginShowing = true
+//                    sessionManagerService.showSignUp()
                 }) {
-                    Text("Already have an account? Log in here.")
+                    Text("Already have an account?")
                         .foregroundColor(Color.blue)
                 }
-//                    NavigationLink(destination: LoginView()) {
-//                        Text("Already have an account? Log in here.")
-//                            .foregroundColor(Color.blue)
-//                    }
-                }.padding()
                 Spacer()
+            }
+                .padding()
+                .navigationBarTitle("Sign Up")
+                
     }
 }
 
