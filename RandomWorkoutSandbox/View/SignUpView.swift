@@ -11,10 +11,12 @@ struct SignUpView: View {
     @EnvironmentObject var sessionManagerService: SessionManagerService
     @State var email = ""
     @State var password = ""
+    @State var confirmPassword = ""
     @State var isLoginShowing = false
     
     var body: some View {
             VStack {
+                AppIconImage()
                 WelcomeText(text: "Create a new account.", subText: "Please enter your information.")
                 Text(sessionManagerService.signupErrorMessage)
                     .foregroundColor(Color.red)
@@ -22,7 +24,7 @@ struct SignUpView: View {
                 HStack {
                     Image(systemName: "person")
                         .foregroundColor(.secondary)
-                    TextField("Username", text: $email).autocapitalization(.none)
+                    TextField("Email", text: $email).autocapitalization(.none)
                     
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
@@ -32,8 +34,14 @@ struct SignUpView: View {
                     SecureField("Password", text: $password).autocapitalization(.none)
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
+                HStack {
+                    Image(systemName: "lock")
+                        .foregroundColor(.secondary)
+                    SecureField("Confirm Password", text: $confirmPassword).autocapitalization(.none)
+                }.padding()
+                .background(Capsule().fill(lightGreyColor))
                 Button(action:{
-                    sessionManagerService.signUp(username: email, password: password, email: email)
+                    sessionManagerService.signUp(username: email, password: password, confrimPassword: confirmPassword, email: email)
                 }) {
                     AuthButtonConent(text: "SIGN UP")
                         .background(Capsule().fill(iconGreen))

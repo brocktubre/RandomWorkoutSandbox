@@ -38,7 +38,12 @@ final class SessionManagerService: ObservableObject {
         authState = .login
     }
     
-    func signUp(username: String, password: String, email: String) {
+    func signUp(username: String, password: String, confrimPassword: String, email: String) {
+        let matchingPasswords = checkMatchingPasswords(password: password, passwordConfirm: confrimPassword)
+        if(!matchingPasswords) {
+            self.signupErrorMessage = "Passwords do not match."
+            return
+        }
         let userAttributes = [AuthUserAttribute(.email, value: email)]
         let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
         _ = Amplify.Auth.signUp(username: username, password: password, options: options) {
@@ -63,6 +68,14 @@ final class SessionManagerService: ObservableObject {
                     }
                     print("Sign up error", error)
             }
+        }
+    }
+    
+    func checkMatchingPasswords(password: String, passwordConfirm: String) -> Bool {
+        if(password != passwordConfirm) {
+            return false
+        } else {
+            return true
         }
     }
     

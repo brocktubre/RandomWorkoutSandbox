@@ -12,28 +12,31 @@ struct ConfirmationView: View {
     @State var confirmationCode = ""
     let username: String
     var body: some View {
-        NavigationView {
             VStack {
+                Image(systemName: "envelope.badge")
+                    .foregroundColor(iconGreen)
+                    .imageScale(.large)
+                    .font(.system(size: 150))
+                Spacer()
                 WelcomeText(text: "Enter Confirmation Code", subText: "Check your email for your confirmation code.")
                 Text(sessionManagerService.confirmationErrorMessage)
                     .foregroundColor(Color.red)
                     .fontWeight(.heavy)
-                TextField("Confirmation Code", text: $confirmationCode)
-                    .padding()
-                    .background(lightGreyColor)
-                    .cornerRadius(5.0)
-                    .padding(.bottom, 20)
+                HStack {
+                    Image(systemName: "pencil")
+                        .foregroundColor(.secondary)
+                    TextField("Confirmation Code", text: $confirmationCode)
+                    
+                }.padding()
+                .background(Capsule().fill(lightGreyColor))
                 Button(action:{
                     sessionManagerService.confirm(username: username, code: confirmationCode)
                 }) {
                     AuthButtonConent(text: "CONFIRM")
                         .background(Capsule().fill(iconGreen))
                 }.padding(.bottom, 20)
+                Spacer()
             }.padding()
-            
-        }
-        
-        
     }
 }
 

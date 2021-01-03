@@ -23,14 +23,14 @@ struct LoginView: View {
     var body: some View {
             VStack{
                 WelcomeText(text: "Welcome back!", subText: "Please login to your account.")
-                UserImage()
+                AppIconImage()
                 Text(sessionManagerService.loginErrorMessage)
                     .foregroundColor(Color.red)
                     .fontWeight(.heavy)
                 HStack {
                     Image(systemName: "person")
                         .foregroundColor(.secondary)
-                    TextField("Username", text: $username).autocapitalization(.none)
+                    TextField("Email/Username", text: $username).autocapitalization(.none)
                     
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
@@ -72,7 +72,7 @@ struct LoginView_Previews: PreviewProvider {
         NavigationView{
             VStack{
                 WelcomeText(text: "Welcome back!", subText: "Please login to your account.")
-                UserImage()
+                AppIconImage()
                 Text("Username")
                     .padding()
                     .background(lightGreyColor)
@@ -105,7 +105,6 @@ struct WelcomeText: View {
             Text(text)
                 .font(.title)
                 .fontWeight(.semibold)
-                .padding(.bottom, 10)
             Text(subText)
                 .font(.subheadline)
                 .padding(.bottom, 20)
@@ -114,7 +113,7 @@ struct WelcomeText: View {
     }
 }
 
-struct UserImage: View {
+struct AppIconImage: View {
     var body: some View {
         Image("login-icon")
             .resizable()
