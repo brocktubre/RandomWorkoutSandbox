@@ -17,6 +17,8 @@ struct LoginView: View {
     @State var username: String = ""
     @State var password: String = ""
     
+    @State var isActive: Bool = false
+    
     var body: some View {
             VStack{
                 Spacer()

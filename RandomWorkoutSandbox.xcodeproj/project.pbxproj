@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		003C3D95259ADB390087E52C /* MovementView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3D94259ADB390087E52C /* MovementView.swift */; };
 		003C3DBF259CB2090087E52C /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DBE259CB2090087E52C /* Equipment.swift */; };
 		003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DC2259CB9120087E52C /* EquipmentView.swift */; };
 		003C3DD0259CF41C0087E52C /* EquipmentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DCF259CF41C0087E52C /* EquipmentList.swift */; };
@@ -29,7 +28,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		003C3D94259ADB390087E52C /* MovementView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovementView.swift; sourceTree = "<group>"; };
 		003C3DBE259CB2090087E52C /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
 		003C3DC2259CB9120087E52C /* EquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentView.swift; sourceTree = "<group>"; };
 		003C3DCF259CF41C0087E52C /* EquipmentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentList.swift; sourceTree = "<group>"; };
@@ -124,7 +122,6 @@
 			isa = PBXGroup;
 			children = (
 				009EB243259A374B0007358A /* EquipmentListView.swift */,
-				003C3D94259ADB390087E52C /* MovementView.swift */,
 				003C3DC2259CB9120087E52C /* EquipmentView.swift */,
 				003C3DD6259CF82C0087E52C /* DetailsView.swift */,
 				00A2C58A25A17205008E92DA /* LoginView.swift */,
@@ -303,7 +300,6 @@
 				00D5CA6A25A1FBC900A88E40 /* SignUpView.swift in Sources */,
 				00D5CA7725A2012F00A88E40 /* SessionManagerService.swift in Sources */,
 				00D5CA6D25A1FEB400A88E40 /* ConfirmationView.swift in Sources */,
-				003C3D95259ADB390087E52C /* MovementView.swift in Sources */,
 				009EB244259A374B0007358A /* EquipmentListView.swift in Sources */,
 				003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */,
 				009EB242259A374B0007358A /* RandomWorkoutSandboxApp.swift in Sources */,

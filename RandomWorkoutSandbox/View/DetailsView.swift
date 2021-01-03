@@ -31,6 +31,7 @@ struct RandomMovementView: View {
     let wc: WorkoutController
     @State public var movement: String
     @State private var showAlert: Bool = false
+    @EnvironmentObject var sessionManagerService: SessionManagerService
     var body: some View {
         
         VStack {
@@ -71,7 +72,7 @@ struct RandomMovementView: View {
 
                 })
 
-        }
+        }.navigationBarItems(trailing: Button("Logout", action: sessionManagerService.signOut))
     }
 }
 

@@ -20,6 +20,10 @@ struct EquipmentListView: View {
             List(wc.inMemoryEquipmentList) { equipment in
                 EquipmentRow(equipment: equipment, wc: wc)
             }.navigationTitle("Equipment")
+            .navigationBarItems(trailing: Button("Logout", action: {              sessionManagerService.signOut()
+                })
+            )
+            .listStyle(PlainListStyle())
             .onAppear(){
                 wc.getMovements().subscribe(onNext: { allMovements in
                     DispatchQueue.main.async {
@@ -30,24 +34,6 @@ struct EquipmentListView: View {
             }
 
     }
-    
-    func checkAuthStatus() {
-           Amplify.Auth.fetchAuthSession { (result) in
-               switch result {
-               case .success(let authSession):
-                   print("The current user is signed in: \(authSession.isSignedIn)")
-                   if authSession.isSignedIn {
-                       authStatus = "User is signed in"
-                   } else {
-                       authStatus = "User is signed out"
-                   }
-                   
-               case .failure(let authError):
-                   print("Failed to fetch the Auth Session", authError)
-                   
-               }
-           }
-       }
         
 }
 
@@ -55,9 +41,11 @@ struct EquipmentListView: View {
 struct EquipmentRow: View {
     let equipment: Equipment
     let wc: WorkoutController
+    @EnvironmentObject var sessionManagerService: SessionManagerService
     var body: some View {
         NavigationLink(
             destination: DetailsView(equipment: equipment, wc: wc)
+                .environmentObject(sessionManagerService)
             ) {
             HStack{
                 FavoriteButton(equipment: equipment)
