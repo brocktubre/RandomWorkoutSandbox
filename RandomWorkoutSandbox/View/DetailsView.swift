@@ -44,7 +44,8 @@ struct RandomMovementView: View {
                     self.showAlert = true
                 }) {
                     HStack {
-                        Text("Generate New Movement").accentColor(.white)
+                        Text("Generate New Movement")
+                            .accentColor(.white)
                     }
                 }.onAppear() {
                     _ = wc.getMovementsByEqId(equipment.id).subscribe(onNext: { mEqId in
@@ -56,7 +57,7 @@ struct RandomMovementView: View {
                     })
                 }
                 .padding()
-                .background(Color.blue)
+                .background(iconGreen)
                 .alert(isPresented: $showAlert, content: {
                     .init(
                         title: .init("Generate new \(equipment.name.lowercased()) movement?"),
