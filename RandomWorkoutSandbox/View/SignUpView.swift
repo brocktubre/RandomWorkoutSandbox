@@ -9,6 +9,7 @@ import SwiftUI
 
 struct SignUpView: View {
     @EnvironmentObject var sessionManagerService: SessionManagerService
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var email = ""
     @State var password = ""
     @State var confirmPassword = ""
@@ -23,21 +24,28 @@ struct SignUpView: View {
                     .fontWeight(.heavy)
                 HStack {
                     Image(systemName: "person")
-                        .foregroundColor(.secondary)
-                    TextField("Email", text: $email).autocapitalization(.none)
+                        .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+                    TextField("Email", text: $email)
+                        .autocapitalization(.none)
+                        .colorScheme(.light)
                     
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
                 HStack {
                     Image(systemName: "lock")
-                        .foregroundColor(.secondary)
-                    SecureField("Password", text: $password).autocapitalization(.none)
+                        .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+                    SecureField("Password", text: $password)
+                        .autocapitalization(.none)
+                        .colorScheme(.light)
+                        
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
                 HStack {
                     Image(systemName: "lock")
-                        .foregroundColor(.secondary)
-                    SecureField("Confirm Password", text: $confirmPassword).autocapitalization(.none)
+                        .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+                    SecureField("Confirm Password", text: $confirmPassword)
+                        .autocapitalization(.none)
+                        .colorScheme(.light)
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
                 Button(action:{
@@ -52,7 +60,7 @@ struct SignUpView: View {
                 }) {
                     HStack {
                         Text("Already have an account?")
-                            .foregroundColor(Color.black)
+                            .foregroundColor(colorScheme == .light ? Color.black : Color.white)
                         Text("Login here.")
                             .foregroundColor(iconGreen)
                     }

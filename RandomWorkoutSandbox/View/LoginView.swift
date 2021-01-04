@@ -14,6 +14,7 @@ let iconGreen = Color(red: 18.0/255.0, green: 168.0/255.0, blue: 157.0/255.0, op
 struct LoginView: View {
     
     @EnvironmentObject var sessionManagerService: SessionManagerService
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     
     @State var username: String = ""
     @State var password: String = ""
@@ -29,15 +30,20 @@ struct LoginView: View {
                     .fontWeight(.heavy)
                 HStack {
                     Image(systemName: "person")
-                        .foregroundColor(.secondary)
-                    TextField("Email/Username", text: $username).autocapitalization(.none)
+                        .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+                    TextField("Email/Username", text: $username)
+                        .autocapitalization(.none)
+                        .foregroundColor(Color.black)
+                        .colorScheme(.light)
                     
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
                 HStack {
                     Image(systemName: "lock")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
                     SecureField("Password", text: $password).autocapitalization(.none)
+                        .foregroundColor(Color.black)
+                        .colorScheme(.light)
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
                 Button(action:{
@@ -54,7 +60,7 @@ struct LoginView: View {
                 }) {
                     HStack {
                         Text("Don't have an account?")
-                            .foregroundColor(Color.black)
+                            .foregroundColor(colorScheme == .light ? Color.black : Color.white)
                         Text("Create one.")
                             .foregroundColor(iconGreen)
                     }

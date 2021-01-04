@@ -15,7 +15,7 @@ struct DetailsView: View {
         VStack {
             Spacer()
             HStack(spacing: 16) {
-                FavoriteButton(equipment: equipment)
+                FavoriteButton(equipment: equipment, wc: wc)
                 EquipmentNameAndIdStack(equipment: equipment, equipmentFont: .largeTitle)
             }
             Equipment.Image(name: equipment.imageName)
@@ -37,8 +37,8 @@ struct RandomMovementView: View {
         VStack {
                 Spacer()
                 Text(movement)
-                .font(.largeTitle)
-                .multilineTextAlignment(.center)
+                    .font(.largeTitle)
+                    .multilineTextAlignment(.center)
                 Spacer()
                 Button(action:{
                     self.showAlert = true
@@ -46,6 +46,7 @@ struct RandomMovementView: View {
                     HStack {
                         Text("Generate New Movement")
                             .accentColor(.white)
+                            .font(.title2)
                     }
                 }.onAppear() {
                     _ = wc.getMovementsByEqId(equipment.id).subscribe(onNext: { mEqId in
@@ -91,7 +92,7 @@ struct DetailsView_Preview: View {
         VStack {
             Spacer()
             HStack(spacing: 16) {
-                FavoriteButton(equipment: Equipment())
+                FavoriteButton(equipment: Equipment(), wc: WorkoutController())
                 EquipmentNameAndIdStack(equipment: equipment, equipmentFont: .largeTitle)
             }
             Equipment.Image(name: equipment.imageName)

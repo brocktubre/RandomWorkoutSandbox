@@ -147,5 +147,23 @@ class WorkoutController: UIViewController, ObservableObject {
         }
     }
     
+    func addFavoriteToUser(equipment: Equipment, userId: String){
+        print("We need to toggle equipment \(equipment.name) for user \(userId).")
+//        let body = "{ userId: \(userId), equipmentId: \(equipment.id)}"
+//        let request = RESTRequest(path: "/add-favorite", body: body.data(using: .utf8))
+//        let sink = Amplify.API.put(request: request)
+//                .resultPublisher
+//                .sink {
+//                    if case let .failure(apiError) = $0 {
+//                        print("Failed", apiError)
+//                    }
+//                }
+//                receiveValue: { data in
+//                    let str = String(decoding: data, as: UTF8.self)
+//                    print("Success \(str)")
+//                }
+//            return sink
+    }
+    
 }
 

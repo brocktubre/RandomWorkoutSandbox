@@ -30,6 +30,11 @@ final class SessionManagerService: ObservableObject {
         }
     }
     
+    func getUserId() -> String {
+        guard let userId = Amplify.Auth.getCurrentUser()?.userId else { return ""}
+        return userId
+    }
+    
     func showSignUp() {
         authState = .signUp
     }

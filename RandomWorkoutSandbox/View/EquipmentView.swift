@@ -8,11 +8,14 @@ import SwiftUI
 
 struct FavoriteButton: View {
     @ObservedObject var equipment: Equipment
+    @EnvironmentObject var sessionManagerService: SessionManagerService
+    let wc: WorkoutController
     
     var body: some View {
         let bookmark:String = "bookmark"
         Button {
             equipment.favorite.toggle()
+            wc.addFavoriteToUser(equipment: equipment, userId: sessionManagerService.getUserId())
         } label: {
             Image(systemName: equipment.favorite ? "\(bookmark).fill" : bookmark)
                 .font(.system(size: 48, weight: .light))
@@ -52,8 +55,8 @@ struct Equipment_Previews: PreviewProvider {
     static var previews: some View {
         VStack{
             HStack {
-                FavoriteButton(equipment: Equipment())
-                FavoriteButton(equipment: Equipment(favorite: true))
+//                FavoriteButton(equipment: Equipment(), wc: WorkoutController)
+//                FavoriteButton(equipment: Equipment(favorite: true), wc: WorkoutController)
                 EquipmentNameAndIdStack(equipment: Equipment(), equipmentFont: .largeTitle)
             }
             Equipment.Image(name: Equipment().imageName)

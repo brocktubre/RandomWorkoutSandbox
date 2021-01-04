@@ -25,22 +25,22 @@ struct RandomWorkoutSandboxApp: App {
                         NavigationView {
                             LoginView()
                                 .environmentObject(sessionManagerService)
-                        }
+                        }.navigationViewStyle(StackNavigationViewStyle())
                     case .signUp:
                         NavigationView {
                             SignUpView()
                                 .environmentObject(sessionManagerService)
-                        }
+                        }.navigationViewStyle(StackNavigationViewStyle())
                     case .confirmCode(let username):
                         NavigationView {
                             ConfirmationView(username: username)
                                 .environmentObject(sessionManagerService)
-                        }
+                        }.navigationViewStyle(StackNavigationViewStyle())
                     case .session(let user):
                         NavigationView {
                             EquipmentListView(user: user)
                                 .environmentObject(sessionManagerService)
-                        }
+                        }.navigationViewStyle(StackNavigationViewStyle())
                 }
         }
     }

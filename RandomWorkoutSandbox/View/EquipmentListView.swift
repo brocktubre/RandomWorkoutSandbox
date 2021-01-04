@@ -48,7 +48,7 @@ struct EquipmentRow: View {
                 .environmentObject(sessionManagerService)
             ) {
             HStack{
-                FavoriteButton(equipment: equipment)
+                FavoriteButton(equipment: equipment, wc: wc)
                     .buttonStyle(BorderlessButtonStyle())
                 Equipment.Image(name: equipment.imageName, size: 80)
                 EquipmentNameAndIdStack(equipment: equipment, equipmentFont: .title)

@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ConfirmationView: View {
     @EnvironmentObject var sessionManagerService: SessionManagerService
+    @Environment(\.colorScheme) var colorScheme: ColorScheme
     @State var confirmationCode = ""
     let username: String
     var body: some View {
@@ -24,8 +25,9 @@ struct ConfirmationView: View {
                     .fontWeight(.heavy)
                 HStack {
                     Image(systemName: "pencil")
-                        .foregroundColor(.secondary)
+                        .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
                     TextField("Confirmation Code", text: $confirmationCode)
+                        .colorScheme(.light)
                     
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
