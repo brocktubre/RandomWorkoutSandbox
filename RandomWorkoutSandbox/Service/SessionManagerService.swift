@@ -19,6 +19,7 @@ final class SessionManagerService: ObservableObject {
     @Published var loginErrorMessage: String = ""
     @Published var signupErrorMessage: String = ""
     @Published var confirmationErrorMessage: String = ""
+    @Published var confirmationSignUpMessage: String = ""
     
     func getCurrentAuthUser() {
         let user = Amplify.Auth.getCurrentUser()
@@ -91,6 +92,7 @@ final class SessionManagerService: ObservableObject {
                     print("Confirm signUp succeeded \(confirmResults)")
                     if(confirmResults.isSignupComplete) {
                         DispatchQueue.main.async {
+                            self?.confirmationSignUpMessage = "Congrats! You're ready to sign in with \(username)."
                             self?.showLogin()
                         }
                     }
@@ -104,6 +106,7 @@ final class SessionManagerService: ObservableObject {
     }
     
     func signIn(username: String, password: String) {
+        self.confirmationSignUpMessage = ""
         _ = Amplify.Auth.signIn(username: username, password: password) { [weak self] result in
             switch result {
             case .success(let signInResult):
@@ -141,5 +144,6 @@ final class SessionManagerService: ObservableObject {
         self.loginErrorMessage = ""
         self.signupErrorMessage = ""
         self.confirmationErrorMessage = ""
+        self.confirmationSignUpMessage = ""
     }
 }

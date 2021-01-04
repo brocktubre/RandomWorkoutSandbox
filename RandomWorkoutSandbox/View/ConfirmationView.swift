@@ -23,6 +23,7 @@ struct ConfirmationView: View {
                 Text(sessionManagerService.confirmationErrorMessage)
                     .foregroundColor(Color.red)
                     .fontWeight(.heavy)
+                    .multilineTextAlignment(.center)
                 HStack {
                     Image(systemName: "pencil")
                         .foregroundColor(colorScheme == .light ? .secondary : iconGreen)

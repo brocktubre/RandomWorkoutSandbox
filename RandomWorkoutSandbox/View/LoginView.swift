@@ -28,6 +28,11 @@ struct LoginView: View {
                 Text(sessionManagerService.loginErrorMessage)
                     .foregroundColor(Color.red)
                     .fontWeight(.heavy)
+                    .multilineTextAlignment(.center)
+                Text(sessionManagerService.confirmationSignUpMessage)
+                    .foregroundColor(iconGreen)
+                    .fontWeight(.heavy)
+                    .multilineTextAlignment(.center)
                 HStack {
                     Image(systemName: "person")
                         .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
