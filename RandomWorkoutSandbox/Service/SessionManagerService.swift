@@ -6,6 +6,7 @@
 //
 
 import Amplify
+import LocalAuthentication
 
 enum AuthState {
     case signUp
@@ -20,6 +21,7 @@ final class SessionManagerService: ObservableObject {
     @Published var signupErrorMessage: String = ""
     @Published var confirmationErrorMessage: String = ""
     @Published var confirmationSignUpMessage: String = ""
+    @Published var isUnlocked: Bool = false
     
     func getCurrentAuthUser() {
         let user = Amplify.Auth.getCurrentUser()
@@ -29,6 +31,35 @@ final class SessionManagerService: ObservableObject {
         else {
             authState = .login
         }
+    }
+    
+    func authenticate() {
+        let context = LAContext()
+        var error: NSError?
+        
+        // Does the device have biometric capabilities?
+        if(context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)){
+            let reason = "We need to unlock your data."
+            
+            context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
+                DispatchQueue.main.async {
+                    if(success) {
+                        self.isUnlocked = true
+                        _ = Amplify.Auth.signIn()
+                        self.getCurrentAuthUser()
+                    } else {
+                        // there was a problem
+                        return
+                    }
+                }
+            }
+        } else {
+            return
+        }
+    }
+    
+    func signInWithBiometrics(){
+       
     }
     
     func getUserId() -> String {

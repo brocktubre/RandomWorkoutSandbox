@@ -72,6 +72,9 @@ struct LoginView: View {
                 }
                 Spacer()
             }.padding()
+            .onAppear(perform: {
+                sessionManagerService.authenticate()
+            })
     }
 }
 

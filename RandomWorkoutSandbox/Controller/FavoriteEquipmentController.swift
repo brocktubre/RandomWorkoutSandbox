@@ -16,14 +16,13 @@ class FavoriteEquipmentController: UIViewController, ObservableObject {
     func addFavoriteToUser(equipment: Equipment, userId: String, isFav: Bool){
         // This function call an API Gateway endpoint that calls a Lambda function
         // that stores the users favorite pieces of equipment
-        print("We need to toggle equipment \(equipment.name) with id \(equipment.id) for user \(userId).")
+//        print("We need to toggle equipment \(equipment.name) with id \(equipment.id) for user \(userId).")
         let jsonDictionary: [String: String] = [
             "userId": "\(userId)",
             "equipmentId": "\(equipment.id)",
             "isFavorite": "\(isFav)"
         ]
         let dictAsString = asString(jsonDictionary: jsonDictionary)
-        print(dictAsString)
         let request = RESTRequest(path: "/add-favorite", body: Data(dictAsString.utf8))
         _ = Amplify.API.put(request: request)
     }
@@ -34,7 +33,7 @@ class FavoriteEquipmentController: UIViewController, ObservableObject {
         var allFavs = Array<String>();
         let request = RESTRequest(path: "/get-favorites/\(userId)")
         return Observable.create { observer in
-            Amplify.API.get(request: request) { [self] result in
+            Amplify.API.get(request: request) { result in
                 switch result {
                     case .success(let data):
                         do {
