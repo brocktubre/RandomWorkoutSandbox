@@ -10,12 +10,15 @@ struct FavoriteButton: View {
     @ObservedObject var equipment: Equipment
     @EnvironmentObject var sessionManagerService: SessionManagerService
     let wc: WorkoutController
+    let favEqController: FavoriteEquipmentController = FavoriteEquipmentController()
     
     var body: some View {
         let bookmark:String = "bookmark"
         Button {
             equipment.favorite.toggle()
-            wc.addFavoriteToUser(equipment: equipment, userId: sessionManagerService.getUserId())
+            favEqController.addFavoriteToUser(equipment: equipment,
+                                              userId: sessionManagerService.getUserId(),
+                                              isFav: equipment.favorite)
         } label: {
             Image(systemName: equipment.favorite ? "\(bookmark).fill" : bookmark)
                 .font(.system(size: 48, weight: .light))

@@ -11,28 +11,20 @@ import Amplify
 
 struct EquipmentListView: View {
     @EnvironmentObject var sessionManagerService: SessionManagerService
-    @ObservedObject var wc = WorkoutController()
     @ObservedObject var equipment = Equipment()
     @State var authStatus: String?
     let user: AuthUser
+    let wc: WorkoutController
     
     var body: some View {
             List(wc.inMemoryEquipmentList) { equipment in
                 EquipmentRow(equipment: equipment, wc: wc)
             }.navigationTitle("Equipment")
-            .navigationBarItems(trailing: Button("Logout", action: {              sessionManagerService.signOut()
-                })
+            .navigationBarItems(trailing: Button("Logout", action: {
+                sessionManagerService.signOut()
+            })
             )
             .listStyle(PlainListStyle())
-            .onAppear(){
-                wc.getMovements().subscribe(onNext: { allMovements in
-                    DispatchQueue.main.async {
-                            wc.inMemoryMovements = allMovements
-                            wc.getAllEquipmentList()
-                    }
-                })
-            }
-
     }
         
 }

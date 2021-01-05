@@ -21,6 +21,20 @@
                 ]
             },
             "policyResourceName": "/movements"
+        },
+        {
+            "name": "/add-favorite",
+            "lambdaFunction": "UpdateUserFavoriteEquipmentIOSAmplify",
+            "privacy": {
+                "open": true
+            }
+        },
+        {
+            "name": "/get-favorites/{userId}",
+            "lambdaFunction": "GetUserFavoriteEquipmentIOSAmplify",
+            "privacy": {
+                "open": true
+            }
         }
     ],
     "resourceName": "RandomWodAmplifyApi",
@@ -28,6 +42,12 @@
     "functionArns": [
         {
             "lambdaFunction": "GetAllMovementsIOSAmplify"
+        },
+        {
+            "lambdaFunction": "UpdateUserFavoriteEquipmentIOSAmplify"
+        },
+        {
+            "lambdaFunction": "GetUserFavoriteEquipmentIOSAmplify"
         }
     ],
     "privacy": {
@@ -44,6 +64,23 @@
                 "Name",
                 "Arn"
             ]
+        },
+        {
+            "category": "function",
+            "resourceName": "UpdateUserFavoriteEquipmentIOSAmplify",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        },
+        {
+            "category": "function",
+            "resourceName": "GetUserFavoriteEquipmentIOSAmplify",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
         }
-    ]
+    ],
+    "uuid": "dd88b1dd"
 }

@@ -4,6 +4,16 @@
       "build": true,
       "providerPlugin": "awscloudformation",
       "service": "Lambda"
+    },
+    "UpdateUserFavoriteEquipmentIOSAmplify": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    },
+    "GetUserFavoriteEquipmentIOSAmplify": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
     }
   },
   "api": {
@@ -14,6 +24,22 @@
         {
           "category": "function",
           "resourceName": "GetAllMovementsIOSAmplify",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "UpdateUserFavoriteEquipmentIOSAmplify",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "GetUserFavoriteEquipmentIOSAmplify",
           "attributes": [
             "Name",
             "Arn"

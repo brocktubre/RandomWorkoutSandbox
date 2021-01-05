@@ -104,7 +104,7 @@ class WorkoutController: UIViewController, ObservableObject {
         }
     }
     
-    func getAllEquipmentList() {
+    func getAllEquipmentList(favorites: Array<String>) {
         // break out of the function if the equipment list has already been built
         if(self.inMemoryEquipmentList.count > 0) {
             return
@@ -117,6 +117,14 @@ class WorkoutController: UIViewController, ObservableObject {
                 eqNameArray.append(movement.equipment.name)
                 let eq = Equipment(name: movement.equipment.name, id: movement.equipment.id, imageName: movement.equipment.imageName)
                 returnArray.append(eq)
+            }
+        }
+        
+        for f in favorites {
+            for e in returnArray {
+                if(f == e.id) {
+                    e.favorite = true
+                }
             }
         }
         DispatchQueue.main.async {
@@ -145,24 +153,6 @@ class WorkoutController: UIViewController, ObservableObject {
             observer.onCompleted()
             return Disposables.create()
         }
-    }
-    
-    func addFavoriteToUser(equipment: Equipment, userId: String){
-        print("We need to toggle equipment \(equipment.name) for user \(userId).")
-//        let body = "{ userId: \(userId), equipmentId: \(equipment.id)}"
-//        let request = RESTRequest(path: "/add-favorite", body: body.data(using: .utf8))
-//        let sink = Amplify.API.put(request: request)
-//                .resultPublisher
-//                .sink {
-//                    if case let .failure(apiError) = $0 {
-//                        print("Failed", apiError)
-//                    }
-//                }
-//                receiveValue: { data in
-//                    let str = String(decoding: data, as: UTF8.self)
-//                    print("Success \(str)")
-//                }
-//            return sink
     }
     
 }

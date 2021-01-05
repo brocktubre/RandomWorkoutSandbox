@@ -38,7 +38,7 @@ struct RandomWorkoutSandboxApp: App {
                         }.navigationViewStyle(StackNavigationViewStyle())
                     case .session(let user):
                         NavigationView {
-                            EquipmentListView(user: user)
+                                LoadingDataView(user: user)
                                 .environmentObject(sessionManagerService)
                         }.navigationViewStyle(StackNavigationViewStyle())
                 }
