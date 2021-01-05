@@ -20,6 +20,8 @@ final class SessionManagerService: ObservableObject {
     @Published var signupErrorMessage: String = ""
     @Published var confirmationErrorMessage: String = ""
     @Published var confirmationSignUpMessage: String = ""
+    @Published var resendConfirmationMessage: String = ""
+    private var confirmationUserName: String = ""
     
     func getCurrentAuthUser() {
         let user = Amplify.Auth.getCurrentUser()
@@ -50,6 +52,7 @@ final class SessionManagerService: ObservableObject {
             self.signupErrorMessage = "Passwords do not match."
             return
         }
+        self.confirmationUserName = username
         let userAttributes = [AuthUserAttribute(.email, value: email)]
         let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
         _ = Amplify.Auth.signUp(username: username, password: password, options: options) {
@@ -144,6 +147,18 @@ final class SessionManagerService: ObservableObject {
         self.loginErrorMessage = ""
         self.signupErrorMessage = ""
         self.confirmationErrorMessage = ""
+        self.resendConfirmationMessage = ""
         self.confirmationSignUpMessage = ""
+    }
+    
+    func resendCode(){
+        _ = Amplify.Auth.resendSignUpCode(for: self.confirmationUserName) { [weak self] result in
+            switch result {
+            case .success(let resendSignUpCodeResult):
+                self?.resendConfirmationMessage = "New confirmation code sent."
+            case .failure(let error):
+                self?.confirmationErrorMessage = error.errorDescription
+            }
+        }
     }
 }

@@ -38,6 +38,21 @@ struct ConfirmationView: View {
                     AuthButtonConent(text: "CONFIRM")
                         .background(Capsule().fill(iconGreen))
                 }.padding(.bottom, 20)
+                Button(action: {
+                    sessionManagerService.resendCode()
+                }) {
+                    HStack {
+                        Text("Need another code?")
+                            .foregroundColor(colorScheme == .light ? Color.black : Color.white)
+                        Text("Resend code.")
+                            .foregroundColor(iconGreen)
+                    }
+                }
+                Text(sessionManagerService.resendConfirmationMessage)
+                    .foregroundColor(iconGreen)
+                    .fontWeight(.heavy)
+                    .multilineTextAlignment(.center)
+                    .padding(.top, 20)
                 Spacer()
             }.padding()
     }
