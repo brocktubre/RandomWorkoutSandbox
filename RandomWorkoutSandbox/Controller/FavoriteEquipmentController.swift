@@ -14,6 +14,8 @@ class FavoriteEquipmentController: UIViewController, ObservableObject {
     typealias JSONDictionary = [String : Any]
     
     func addFavoriteToUser(equipment: Equipment, userId: String, isFav: Bool){
+        // This function call an API Gateway endpoint that calls a Lambda function
+        // that stores the users favorite pieces of equipment
         print("We need to toggle equipment \(equipment.name) with id \(equipment.id) for user \(userId).")
         let jsonDictionary: [String: String] = [
             "userId": "\(userId)",
@@ -28,7 +30,7 @@ class FavoriteEquipmentController: UIViewController, ObservableObject {
     
     func getUsersFavoriteEquipment(userId: String) -> Observable<Array<String>> {
         // This function call an API Gateway endpoint that calls a Lambda function
-        // that returns all the values in a DynamoDB table name ios-app-table
+        // that returns all the values in a DynamoDB table name user-equipment-favorites
         var allFavs = Array<String>();
         let request = RESTRequest(path: "/get-favorites/\(userId)")
         return Observable.create { observer in
@@ -61,6 +63,7 @@ class FavoriteEquipmentController: UIViewController, ObservableObject {
     }
     
     func asString(jsonDictionary: JSONDictionary) -> String {
+        // This function helps parse data being sent to API Gateway
       do {
         let data = try JSONSerialization.data(withJSONObject: jsonDictionary, options: .prettyPrinted)
         return String(data: data, encoding: String.Encoding.utf8) ?? ""

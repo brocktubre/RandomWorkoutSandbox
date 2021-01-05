@@ -105,6 +105,9 @@ class WorkoutController: UIViewController, ObservableObject {
     }
     
     func getAllEquipmentList(favorites: Array<String>) {
+        // This function builds out the original equipment list to display when app loads
+        // it also passes in all of the users favorites and makes sure they are marked
+        
         // break out of the function if the equipment list has already been built
         if(self.inMemoryEquipmentList.count > 0) {
             return
@@ -120,6 +123,8 @@ class WorkoutController: UIViewController, ObservableObject {
             }
         }
         
+        // TODO Need to find a more optimal way of
+        // looping through all equipment and marking them as favorites.
         for f in favorites {
             for e in returnArray {
                 if(f == e.id) {

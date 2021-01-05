@@ -22,6 +22,7 @@ struct LoadingDataView: View {
             .navigate(to: EquipmentListView(user: user, wc: wc).environmentObject(sessionManagerService),
                       when: $dataLoaded)
         .onAppear(){
+            // TODO Need to find a better way to NOT next subscriptions
             wc.getMovements().subscribe(onNext: { allMovements in
                 favoriteEquipmentController.getUsersFavoriteEquipment(userId: sessionManagerService.getUserId())
                     .subscribe(onNext: { favorites in
@@ -31,7 +32,6 @@ struct LoadingDataView: View {
                             self.dataLoaded = true
                         }
                     })
-               
             })
         }
     }
