@@ -46,7 +46,7 @@ final class SessionManagerService: ObservableObject {
         }
     }
     
-    func authenticate() {
+    func authenticateWithBiometrics(username: String, password: String, user: User) {
         let context = LAContext()
         var error: NSError?
         
@@ -58,8 +58,7 @@ final class SessionManagerService: ObservableObject {
                 DispatchQueue.main.async {
                     if(success) {
                         self.isUnlocked = true
-                        _ = Amplify.Auth.signIn()
-                        self.getCurrentAuthUser()
+                        self.signIn(username: username, password: password, user: user)
                     } else {
                         // there was a problem
                         return

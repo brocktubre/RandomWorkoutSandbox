@@ -56,8 +56,7 @@ struct LoginView: View {
                         .colorScheme(.light)
                     Spacer()
                     Button(action: {
-                        // TODO
-
+                        sessionManagerService.authenticateWithBiometrics(username: username, password: password, user: user)
                     }) {
                         Image(systemName: "faceid")
                             .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
