@@ -7,6 +7,7 @@
 
 import Amplify
 import LocalAuthentication
+import KeychainSwift
 
 enum AuthState {
     case signUp
@@ -15,13 +16,25 @@ enum AuthState {
     case session(user: AuthUser)
 }
 
+struct Keys {
+    static let username = "username"
+    static let password  = "password"
+    static let rememberMe = "rememberMe"
+}
+
 final class SessionManagerService: ObservableObject {
     @Published var authState: AuthState = .login
     @Published var loginErrorMessage: String = ""
     @Published var signupErrorMessage: String = ""
     @Published var confirmationErrorMessage: String = ""
     @Published var confirmationSignUpMessage: String = ""
+
     @Published var isUnlocked: Bool = false
+
+    @Published var resendConfirmationMessage: String = ""
+    private var confirmationUserName: String = ""
+    
+    let keychain = KeychainSwift(keyPrefix: "randommovement_")
     
     func getCurrentAuthUser() {
         let user = Amplify.Auth.getCurrentUser()
@@ -81,6 +94,7 @@ final class SessionManagerService: ObservableObject {
             self.signupErrorMessage = "Passwords do not match."
             return
         }
+        self.confirmationUserName = username
         let userAttributes = [AuthUserAttribute(.email, value: email)]
         let options = AuthSignUpRequest.Options(userAttributes: userAttributes)
         _ = Amplify.Auth.signUp(username: username, password: password, options: options) {
@@ -136,7 +150,7 @@ final class SessionManagerService: ObservableObject {
         }
     }
     
-    func signIn(username: String, password: String) {
+    func signIn(username: String, password: String, user: User) {
         self.confirmationSignUpMessage = ""
         _ = Amplify.Auth.signIn(username: username, password: password) { [weak self] result in
             switch result {
@@ -144,7 +158,8 @@ final class SessionManagerService: ObservableObject {
                     print("User successfully signed in \(signInResult)")
                 if(signInResult.isSignedIn) {
                     DispatchQueue.main.async {
-                        self?.completeSignOut()
+                        self?.scrubUiMessages()
+                        self?.storeInKeychain(user: user, username: username, password: password)
                     }
                 }
                 case .failure(let error):
@@ -170,11 +185,70 @@ final class SessionManagerService: ObservableObject {
         }
     }
     
-    func completeSignOut() {
+    func scrubUiMessages() {
         self.getCurrentAuthUser()
         self.loginErrorMessage = ""
         self.signupErrorMessage = ""
         self.confirmationErrorMessage = ""
+        self.resendConfirmationMessage = ""
         self.confirmationSignUpMessage = ""
+    }
+    
+    func resendCode(){
+        _ = Amplify.Auth.resendSignUpCode(for: self.confirmationUserName) { [weak self] result in
+            switch result {
+            case .success(let resendSignUpCodeResult):
+                self?.resendConfirmationMessage = "New confirmation code sent."
+            case .failure(let error):
+                self?.confirmationErrorMessage = error.errorDescription
+            }
+        }
+    }
+    
+    func storeInKeychain(user: User, username: String, password: String) {
+        user.id = self.getUserId()
+        user.username = username
+        user.password = password
+        
+        if(user.rememberMe) {
+            // user wants thier information saved
+            keychain.set(username, forKey: Keys.username, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
+            keychain.set(password, forKey: Keys.password, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
+            keychain.set("true", forKey: Keys.rememberMe, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
+        }
+    }
+    
+    func getUsername() -> String {
+        if(keychain.get(Keys.username) != nil) {
+            return keychain.get(Keys.username) ?? ""
+        } else {
+            return ""
+        }
+    }
+    
+    func getPassword() -> String {
+        if(keychain.get(Keys.password) != nil) {
+            return keychain.get(Keys.password) ?? ""
+        } else {
+            return ""
+        }
+    }
+    
+    func getRememberMe() -> Bool {
+        if(keychain.get(Keys.rememberMe) == "true") {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    func setRememeberMe(user: User) {
+        if(user.rememberMe) {
+            keychain.set(user.rememberMe, forKey: Keys.rememberMe, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
+        } else {
+            keychain.delete(Keys.rememberMe)
+            keychain.delete(Keys.username)
+            keychain.delete(Keys.password)
+        }
     }
 }

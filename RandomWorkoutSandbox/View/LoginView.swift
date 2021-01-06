@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import KeychainSwift
 
 let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
 let iconGreen = Color(red: 18.0/255.0, green: 168.0/255.0, blue: 157.0/255.0, opacity: 1.0)
@@ -20,6 +21,9 @@ struct LoginView: View {
     @State var password: String = ""
     
     @State var isShowingSignUpView = false
+    
+    let checkmark = "checkmark.square"
+    @ObservedObject var user = User()
     
     var body: some View {
             VStack{
@@ -46,13 +50,32 @@ struct LoginView: View {
                 HStack {
                     Image(systemName: "lock")
                         .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
-                    SecureField("Password", text: $password).autocapitalization(.none)
+                    SecureField("Password", text: $password)
+                        .autocapitalization(.none)
                         .foregroundColor(Color.black)
                         .colorScheme(.light)
+                    Spacer()
+                    Button(action: {
+                        // TODO
+
+                    }) {
+                        Image(systemName: "faceid")
+                            .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+                    }
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
+                HStack {
+                    Text("Remember me")
+                    Button(action: {
+                        user.rememberMe.toggle()
+                        sessionManagerService.setRememeberMe(user: user)
+
+                    }) {
+                        Image(systemName: user.rememberMe ? "\(checkmark).fill" : checkmark)
+                    }
+                }.padding(20)
                 Button(action:{
-                    sessionManagerService.signIn(username: username, password: password)
+                    sessionManagerService.signIn(username: username, password: password, user: user)
                 }) {
                     AuthButtonConent(text: "LOGIN")
                         .background(Capsule().fill(iconGreen))
@@ -70,11 +93,12 @@ struct LoginView: View {
                             .foregroundColor(iconGreen)
                     }
                 }
-                Spacer()
             }.padding()
-            .onAppear(perform: {
-                sessionManagerService.authenticate()
-            })
+            .onAppear() {
+                username = sessionManagerService.getUsername()
+                password = sessionManagerService.getPassword()
+                user.rememberMe = sessionManagerService.getRememberMe()
+            }
     }
 }
 

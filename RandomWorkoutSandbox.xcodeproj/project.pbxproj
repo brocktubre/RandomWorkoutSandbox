@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		001AB46D25A5F7FD00367E28 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 001AB46C25A5F7FD00367E28 /* User.swift */; };
 		003C3DBF259CB2090087E52C /* Equipment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DBE259CB2090087E52C /* Equipment.swift */; };
 		003C3DC3259CB9130087E52C /* EquipmentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DC2259CB9120087E52C /* EquipmentView.swift */; };
 		003C3DD0259CF41C0087E52C /* EquipmentList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 003C3DCF259CF41C0087E52C /* EquipmentList.swift */; };
@@ -30,6 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		001AB46C25A5F7FD00367E28 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		003C3DBE259CB2090087E52C /* Equipment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Equipment.swift; sourceTree = "<group>"; };
 		003C3DC2259CB9120087E52C /* EquipmentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentView.swift; sourceTree = "<group>"; };
 		003C3DCF259CF41C0087E52C /* EquipmentList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EquipmentList.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				009EB251259A9E570007358A /* Movement.swift */,
 				003C3DBE259CB2090087E52C /* Equipment.swift */,
+				001AB46C25A5F7FD00367E28 /* User.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -300,6 +303,7 @@
 				008EFADD25A3F7AD0003C434 /* LoadingDataView.swift in Sources */,
 				009EB25D259AA3BA0007358A /* WorkoutController.swift in Sources */,
 				003C3DD7259CF82C0087E52C /* DetailsView.swift in Sources */,
+				001AB46D25A5F7FD00367E28 /* User.swift in Sources */,
 				008EFAD925A3F79D0003C434 /* FavoriteEquipmentController.swift in Sources */,
 				003C3DD0259CF41C0087E52C /* EquipmentList.swift in Sources */,
 				00830BC0259E20A7000C6D3D /* MovementList.swift in Sources */,
