@@ -10,6 +10,7 @@ import UIKit
 import Amplify
 import Combine
 import RxSwift
+import SwiftUI
 
 
 class WorkoutController: UIViewController, ObservableObject {

@@ -6,12 +6,15 @@
 //
 
 import SwiftUI
+import KeychainSwift
 
 let lightGreyColor = Color(red: 239.0/255.0, green: 243.0/255.0, blue: 244.0/255.0, opacity: 1.0)
 let iconGreen = Color(red: 18.0/255.0, green: 168.0/255.0, blue: 157.0/255.0, opacity: 1.0)
 
 
 struct LoginView: View {
+    
+    let keychain = KeychainSwift(keyPrefix: "randommovement_")
     
     @EnvironmentObject var sessionManagerService: SessionManagerService
     @Environment(\.colorScheme) var colorScheme: ColorScheme
@@ -20,6 +23,9 @@ struct LoginView: View {
     @State var password: String = ""
     
     @State var isShowingSignUpView = false
+    
+    let checkmark = "checkmark.square"
+    @ObservedObject var user = User()
     
     var body: some View {
             VStack{
@@ -51,6 +57,14 @@ struct LoginView: View {
                         .colorScheme(.light)
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
+                HStack {
+                    Text("Remember me")
+                    Button(action: {
+                        user.rememberMe.toggle()
+                    }) {
+                        Image(systemName:  user.rememberMe ? "\(checkmark).fill" : checkmark)
+                    }
+                }.padding(20)
                 Button(action:{
                     sessionManagerService.signIn(username: username, password: password)
                 }) {
@@ -70,7 +84,6 @@ struct LoginView: View {
                             .foregroundColor(iconGreen)
                     }
                 }
-                Spacer()
             }.padding()
     }
 }
