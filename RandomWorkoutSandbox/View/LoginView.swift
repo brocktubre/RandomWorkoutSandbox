@@ -55,13 +55,13 @@ struct LoginView: View {
                         .foregroundColor(Color.black)
                         .colorScheme(.light)
                     Spacer()
-                    Button(action: {
-                        // TODO
-
-                    }) {
-                        Image(systemName: "faceid")
-                            .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
-                    }
+//                    Button(action: {
+//                        // TODO
+//
+//                    }) {
+//                        Image(systemName: "faceid")
+//                            .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+//                    }
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
                 HStack {
