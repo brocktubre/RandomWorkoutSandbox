@@ -55,16 +55,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "9C724A5F-58D9-4C8E-873B-CF29F3094337"
+            uuid = "6D4CCB9F-619C-491E-986B-C5A79BF293ED"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "RandomWorkoutSandbox/Service/SessionManagerService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
-            landmarkName = "confirm(username:code:)"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "authenticateWithBiometrics(username:password:user:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BC6F79BA-11EC-422E-ABBA-9E94D9AEB215"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "RandomWorkoutSandbox/Service/SessionManagerService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "268"
+            endingLineNumber = "268"
+            landmarkName = "getRememberMe()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

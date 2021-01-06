@@ -84,7 +84,7 @@ struct LoginView: View {
                         sessionManagerService.setRememeberMe(user: user)
 
                     }) {
-                        Image(systemName: user.rememberMe ? "\(checkmark).fill" : checkmark)
+                        Image(systemName: (user.rememberMe || sessionManagerService.getRememberMe()) ? "\(checkmark).fill" : checkmark)
                     }
                 }.padding(5)
                 Button(action:{
@@ -108,8 +108,8 @@ struct LoginView: View {
                 }
             }.padding()
             .onAppear() {
-                biometricType = sessionManagerService.getBiometricType()
                 user.rememberMe = sessionManagerService.getRememberMe()
+//                biometricType = sessionManagerService.getBiometricType()
                 if(user.rememberMe) {
                     username = sessionManagerService.getUsername()
                     password = sessionManagerService.getPassword()
