@@ -274,7 +274,7 @@ final class SessionManagerService: ObservableObject {
     
     func setRememeberMe(user: User) {
         if(user.rememberMe) {
-            keychain.set(user.rememberMe, forKey: Keys.rememberMe, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
+            keychain.set("true", forKey: Keys.rememberMe, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
         } else {
             keychain.delete(Keys.rememberMe)
             keychain.delete(Keys.username)
