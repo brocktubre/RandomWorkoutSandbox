@@ -29,7 +29,6 @@ final class SessionManagerService: ObservableObject {
     @Published var confirmationErrorMessage: String = ""
     @Published var confirmationSignUpMessage: String = ""
 
-    @Published var isUnlocked: Bool = false
     @Published var showFaceId: Bool = false
     @Published var biometricType: String = ""
 
@@ -78,20 +77,22 @@ final class SessionManagerService: ObservableObject {
         if(username == "" && password == "") {
             self.showFaceId = true
             return
+        } else {
+            self.showFaceId = false
         }
         
         // Does the device have biometric capabilities?
         if(context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)){
             let reason = "We need to access your device data to authenticate your login."
+            context.localizedFallbackTitle = "Enter PIN";
             
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                 DispatchQueue.main.async {
                     if(success) {
-                        self.isUnlocked = true
                         self.signIn(username: username, password: password, user: user)
                     } else {
                         // there was a problem
-                        return
+                        
                     }
                 }
             }
