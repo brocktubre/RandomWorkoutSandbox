@@ -30,6 +30,8 @@ final class SessionManagerService: ObservableObject {
     @Published var confirmationSignUpMessage: String = ""
 
     @Published var isUnlocked: Bool = false
+    @Published var showFaceId: Bool = false
+    @Published var biometricType: String = ""
 
     @Published var resendConfirmationMessage: String = ""
     private var confirmationUserName: String = ""
@@ -46,13 +48,41 @@ final class SessionManagerService: ObservableObject {
         }
     }
     
+    func getBiometricType() -> String {
+        let context = LAContext()
+        var error: NSError?
+        let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
+        
+        if(context.biometryType == LABiometryType.faceID) {
+            self.biometricType = "Face ID"
+        } else if(context.biometryType == LABiometryType.touchID) {
+            self.biometricType = "Touch ID"
+        } else {
+            self.biometricType = ""
+        }
+        return self.biometricType
+
+    }
+    
     func authenticateWithBiometrics(username: String, password: String, user: User) {
         let context = LAContext()
         var error: NSError?
         
+        // Tries to grab the username and password
+        // stored in the key chain. If they exists
+        // the user does not have to enter thier creditials and they can
+        // use biometrics to allow them to login
+        let username = self.getUsername()
+        let password = self.getPassword()
+
+        if(username == "" && password == "") {
+            self.showFaceId = true
+            return
+        }
+        
         // Does the device have biometric capabilities?
         if(context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)){
-            let reason = "We need to unlock your data."
+            let reason = "We need to access your device data to authenticate your login."
             
             context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, authenticationError in
                 DispatchQueue.main.async {
@@ -209,10 +239,10 @@ final class SessionManagerService: ObservableObject {
         user.username = username
         user.password = password
         
+        keychain.set(username, forKey: Keys.username, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
+        keychain.set(password, forKey: Keys.password, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
+        
         if(user.rememberMe) {
-            // user wants thier information saved
-            keychain.set(username, forKey: Keys.username, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
-            keychain.set(password, forKey: Keys.password, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
             keychain.set("true", forKey: Keys.rememberMe, withAccess: KeychainSwiftAccessOptions.accessibleWhenUnlocked)
         }
     }

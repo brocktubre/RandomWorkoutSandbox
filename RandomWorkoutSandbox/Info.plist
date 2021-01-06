@@ -3,7 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>NSFaceIDUsageDescription</key>
-	<string>We need to unlock your data.</string>
+	<string>We need to access your device data to authenticate your login.</string>
+	<key>Touch</key>
+	<string></string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>

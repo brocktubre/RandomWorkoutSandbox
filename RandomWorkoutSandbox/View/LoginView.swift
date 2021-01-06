@@ -16,11 +16,16 @@ struct LoginView: View {
     
     @EnvironmentObject var sessionManagerService: SessionManagerService
     @Environment(\.colorScheme) var colorScheme: ColorScheme
+
     
     @State var username: String = ""
     @State var password: String = ""
     
     @State var isShowingSignUpView = false
+    
+    @State var showFaceId = false
+    
+    @State var biometricType:String = ""
     
     let checkmark = "checkmark.square"
     @ObservedObject var user = User()
@@ -57,9 +62,18 @@ struct LoginView: View {
                     Spacer()
                     Button(action: {
                         sessionManagerService.authenticateWithBiometrics(username: username, password: password, user: user)
+                        self.showFaceId = sessionManagerService.showFaceId
                     }) {
-                        Image(systemName: "faceid")
-                            .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+                        if(biometricType == "Face ID") {
+                            Image(systemName: "faceid")
+                                .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+                        }
+                        else if(biometricType == "Touch ID") {
+                            Image("fingerprint")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20)
+                        }
                     }
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
@@ -72,13 +86,13 @@ struct LoginView: View {
                     }) {
                         Image(systemName: user.rememberMe ? "\(checkmark).fill" : checkmark)
                     }
-                }.padding(20)
+                }.padding(5)
                 Button(action:{
                     sessionManagerService.signIn(username: username, password: password, user: user)
                 }) {
                     AuthButtonConent(text: "LOGIN")
                         .background(Capsule().fill(iconGreen))
-                }.padding(.bottom, 20)
+                }.padding(.bottom, 5)
                 NavigationLink(
                     destination: SignUpView().environmentObject(sessionManagerService),
                     isActive: $isShowingSignUpView) { EmptyView() }
@@ -94,9 +108,14 @@ struct LoginView: View {
                 }
             }.padding()
             .onAppear() {
-                username = sessionManagerService.getUsername()
-                password = sessionManagerService.getPassword()
+                biometricType = sessionManagerService.getBiometricType()
                 user.rememberMe = sessionManagerService.getRememberMe()
+                if(user.rememberMe) {
+                    username = sessionManagerService.getUsername()
+                    password = sessionManagerService.getPassword()
+                }
+            }.alert(isPresented: $showFaceId) {
+                Alert(title: Text("You must first login to enable \(biometricType) or enable \(biometricType) through your settings."), dismissButton: .default(Text("Ok")))
             }
     }
 }
@@ -114,19 +133,19 @@ struct LoginView_Previews: PreviewProvider {
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 10)
                 Text("Password")
                     .padding()
                     .background(lightGreyColor)
                     .cornerRadius(5.0)
-                    .padding(.bottom, 20)
+                    .padding(.bottom, 10)
                 Spacer()
                 Button(action:{
                             print("login user")
                 }) {
                     AuthButtonConent(text: "LOGIN")
                         .background(Capsule().fill(iconGreen))
-                }.padding(.bottom, 20)
+                }.padding(.bottom, 10)
             }.padding()
         }
         
@@ -144,7 +163,7 @@ struct WelcomeText: View {
                 .fontWeight(.semibold)
             Text(subText)
                 .font(.subheadline)
-                .padding(.bottom, 20)
+                .padding(.bottom, 10)
                 .foregroundColor(.secondary)
         }
     }
@@ -157,7 +176,7 @@ struct AppIconImage: View {
             .aspectRatio(contentMode: .fill)
             .frame(width: 150, height: 150)
             .clipped()
-            .padding(.bottom, 20)
+            .padding(.bottom, 5)
             .foregroundColor(Color.blue)
     }
 }
