@@ -25,14 +25,14 @@ struct LoginView: View {
     
     @State var showFaceId = false
     
-    @State var biometricType:String = ""
+    @State var biometricType:String = "none"
     
     let checkmark = "checkmark.square"
     @ObservedObject var user = User()
     
     var body: some View {
             VStack{
-                WelcomeText(text: user.toString(), subText: "Please login to your account.")
+                WelcomeText(text: "Welcome back!", subText: "Please login to your account.")
                 AppIconImage()
                 Text(sessionManagerService.loginErrorMessage)
                     .foregroundColor(Color.red)
@@ -65,12 +65,12 @@ struct LoginView: View {
                         self.showFaceId = sessionManagerService.showFaceId
                     }) {
                         
-//                        let b = sessionManagerService.getBiometricType()
-//                        if(b == "Face ID") {
-//                            Image(systemName: "faceid")
-//                                .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
-//                        }
-//                        else if(b == "Touch ID") {
+                        let b = biometricType
+                        if(b == "face") {
+                            Image(systemName: "faceid")
+                                .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+                        }
+//                        else if(b == "touch") {
 //                            Image("fingerprint")
 //                                .resizable()
 //                                .aspectRatio(contentMode: .fit)
@@ -110,12 +110,12 @@ struct LoginView: View {
                 }
             }.padding()
             .onAppear(perform:  {
-//                biometricType = sessionManagerService.getBiometricType()
                 user.rememberMe = sessionManagerService.getRememberMe()
                 if(user.rememberMe) {
                     username = sessionManagerService.getUsername()
                     password = sessionManagerService.getPassword()
                 }
+                biometricType = sessionManagerService.getBiometricType()
             })
             .alert(isPresented: $showFaceId) {
                 Alert(title: Text("You must first login to enable \(biometricType) or enable \(biometricType) through your settings."), dismissButton: .default(Text("Ok")))

@@ -22,6 +22,11 @@ struct Keys {
     static let rememberMe = "rememberMe"
 }
 
+struct BiometricType {
+    static let none = "none"
+    static let touch = "touch"
+    static let face = "face"
+}
 final class SessionManagerService: ObservableObject {
     @Published var authState: AuthState = .login
     @Published var loginErrorMessage: String = ""
@@ -47,21 +52,23 @@ final class SessionManagerService: ObservableObject {
         }
     }
     
-    func getBiometricType() -> String {
-        let context = LAContext()
-        var error: NSError?
-        let _ = context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error)
-        
-        if(context.biometryType == LABiometryType.faceID) {
-            self.biometricType = "Face ID"
-        } else if(context.biometryType == LABiometryType.touchID) {
-            self.biometricType = "Touch ID"
+    public func getBiometricType() -> String {
+        let authContext = LAContext()
+        if #available(iOS 11, *) {
+            let _ = authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil)
+            switch(authContext.biometryType) {
+                case .none:
+                    return BiometricType.none
+                case .touchID:
+                    return BiometricType.touch
+                case .faceID:
+                    return BiometricType.face
+            }
         } else {
-            self.biometricType = ""
+            return authContext.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: nil) ? BiometricType.touch : BiometricType.none
         }
-        return self.biometricType
-
     }
+
     
     func authenticateWithBiometrics(username: String, password: String, user: User) {
         let context = LAContext()
