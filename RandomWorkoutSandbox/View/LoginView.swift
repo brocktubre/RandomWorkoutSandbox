@@ -32,7 +32,7 @@ struct LoginView: View {
     
     var body: some View {
             VStack{
-                WelcomeText(text: "Welcome back!", subText: "Please login to your account.")
+                WelcomeText(text: user.toString(), subText: "Please login to your account.")
                 AppIconImage()
                 Text(sessionManagerService.loginErrorMessage)
                     .foregroundColor(Color.red)
@@ -64,16 +64,18 @@ struct LoginView: View {
                         sessionManagerService.authenticateWithBiometrics(username: username, password: password, user: user)
                         self.showFaceId = sessionManagerService.showFaceId
                     }) {
-                        if(biometricType == "Face ID") {
-                            Image(systemName: "faceid")
-                                .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
-                        }
-                        else if(biometricType == "Touch ID") {
-                            Image("fingerprint")
-                                .resizable()
-                                .aspectRatio(contentMode: .fit)
-                                .frame(width: 20, height: 20)
-                        }
+                        
+//                        let b = sessionManagerService.getBiometricType()
+//                        if(b == "Face ID") {
+//                            Image(systemName: "faceid")
+//                                .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
+//                        }
+//                        else if(b == "Touch ID") {
+//                            Image("fingerprint")
+//                                .resizable()
+//                                .aspectRatio(contentMode: .fit)
+//                                .frame(width: 20, height: 20)
+//                        }
                     }
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
@@ -107,14 +109,15 @@ struct LoginView: View {
                     }
                 }
             }.padding()
-            .onAppear() {
-                user.rememberMe = sessionManagerService.getRememberMe()
+            .onAppear(perform:  {
 //                biometricType = sessionManagerService.getBiometricType()
+                user.rememberMe = sessionManagerService.getRememberMe()
                 if(user.rememberMe) {
                     username = sessionManagerService.getUsername()
                     password = sessionManagerService.getPassword()
                 }
-            }.alert(isPresented: $showFaceId) {
+            })
+            .alert(isPresented: $showFaceId) {
                 Alert(title: Text("You must first login to enable \(biometricType) or enable \(biometricType) through your settings."), dismissButton: .default(Text("Ok")))
             }
     }
