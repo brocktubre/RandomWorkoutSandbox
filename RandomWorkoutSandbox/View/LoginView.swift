@@ -70,12 +70,12 @@ struct LoginView: View {
                             Image(systemName: "faceid")
                                 .foregroundColor(colorScheme == .light ? .secondary : iconGreen)
                         }
-//                        else if(b == "touch") {
-//                            Image("fingerprint")
-//                                .resizable()
-//                                .aspectRatio(contentMode: .fit)
-//                                .frame(width: 20, height: 20)
-//                        }
+                        else if(b == "touch") {
+                            Image("fingerprint")
+                                .resizable()
+                                .aspectRatio(contentMode: .fit)
+                                .frame(width: 20, height: 20)
+                        }
                     }
                 }.padding()
                 .background(Capsule().fill(lightGreyColor))
